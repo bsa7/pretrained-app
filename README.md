@@ -1,7 +1,7 @@
 # Web application using a Pretrained Machine Learning Model
 
 ## Working example
-Follow this [link](https://bsa7-pretrained-app-appmain-pp-2-implement-minimal-strea-avsknw.streamlitapp.com/) to open application.
+Follow this [link](https://bsa7-pretrained-app-appmain-lijwxg.streamlitapp.com/) to open application.
 
 ## Install and run application for development
   * [receiveing](./docs/develop-app.md#clone-project) application to your computer;
