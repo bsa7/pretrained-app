@@ -5,3 +5,5 @@ services:
     build:
       context: .
       dockerfile: Dockerfile
+    volumes:
+      - ./.pytest_cache:/app/.pytest_cache:Z

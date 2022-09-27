@@ -15,8 +15,11 @@ git clone git@github.com:bsa7/pretrained-app.git
 It will create children folder `/projects/pretrained-app`.
 
 ## Prepare environment
+> install [docker](https://docs.docker.com/engine/install/) and [docker-compose](https://docs.docker.com/compose/install/), if it not yet installed on your system. [Instructions]()
 
-### Install dependencies
+> install [chrome](https://www.google.com/chrome/) and use it in the future.
+
+### Build application containers
 cd into our **project folder**:
 
 ```
@@ -25,20 +28,19 @@ cd /projects/pretrained-app
 
 install required dependencies:
 ```
-pip install -r requirements.txt
+./docker/build.sh
 ```
 
-> install pip, follow [instructions](https://pip.pypa.io/en/stable/installation/), if need.
+> About pip, read [documentation](https://pip.pypa.io/en/stable/), if need.
 
 ## Run application
 ```
-docker-compose -f docker-compose.yml up
+./docker/run_streamlit.sh
 ```
 
 If all going well, you would see the output in terminal like this:
 ```
- ---> Running in 838ffff60b88
-
+...
 Collecting usage statistics. To deactivate, set browser.gatherUsageStats to False.
 
 
@@ -50,6 +52,25 @@ Collecting usage statistics. To deactivate, set browser.gatherUsageStats to Fals
 ```
 Click on the `Network URL` link and application will be opened in your browser.
 
-> install [docker](https://docs.docker.com/engine/install/) and [docker-compose](https://docs.docker.com/compose/install/), if it not yet installed on your system. [Instructions]()
+## Run tests
+All tests for application stored in `./test` folder. You can run single test and, of course, all tests in suite.
 
-> install [chrome](https://www.google.com/chrome/) and use it in the future.
+### To run all tests in single file:
+```bash
+./docker/run_tests.sh
+```
+
+If all going fine, you would see output in console, like that:
+```bash
+Creating pretrained-app_app_run ... done
+Run all tests
+=========================================================================== test session starts ============================================================================
+platform linux -- Python 3.10.7, pytest-7.1.3, pluggy-1.0.0
+rootdir: /app, configfile: pytest.ini, testpaths: test
+collected 2 items
+
+test/use_cases/lib/math_utilities_test.py ..                                                                                                                         [100%]
+
+============================================================================ 2 passed in 0.02s =============================================================================
+```
+
