@@ -1,6 +1,6 @@
 ''' This is test case for math_utilities module '''
 import unittest
-from app.lib.math_utilities import square
+from lib.math_utilities import square
 
 class SquareTestCase(unittest.TestCase):
   '''Tests for 'square' function'''

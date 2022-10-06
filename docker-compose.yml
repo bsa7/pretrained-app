@@ -1,9 +1,21 @@
 version: '3.7'
 
 services:
-  app:
+  api:
     build:
       context: .
-      dockerfile: Dockerfile
+      dockerfile: api/Dockerfile
     volumes:
-      - ./.pytest_cache:/app/.pytest_cache:Z
+      - ./api/.:/home/pn/pretrained-app/api/.:Z
+    command: bash -c  "cd /home/pn/pretrained-app/api && python main.py"
+    ports:
+      - '5000:5000'
+
+  front:
+    build:
+      context: .
+      dockerfile: frontend/Dockerfile
+    volumes:
+      - ./frontend/.:/home/node/pretrained-app/frontend/.:Z
+    network_mode: host
+    command: bash -c "cd /home/node/pretrained-app/frontend && npm run web"
