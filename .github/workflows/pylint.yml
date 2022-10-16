@@ -20,4 +20,4 @@ jobs:
         pip install pylint
     - name: Analysing pretrained-app-api source code with pylint
       run: |
-        ./script/run_lint.sh
+        ./script/run_pylint.sh

@@ -3,12 +3,14 @@ ENV APP_PATH=/home/node/pretrained-app/frontend
 ENV LANG C.UTF-8
 ENV LANGUAGE=en_US:en
 ENV LC_ALL C.UTF-8
+ENV NODE_ENV=production
 RUN npm i -g npm@8.19.2 && \
-    npm i expo-cli -g --legacy-peer-deps && \
-    npm i eslint -g
+    npm i expo-cli -g --legacy-peer-deps
 
 USER node
 RUN mkdir -p $APP_PATH
-COPY ./frontend/package.json $APP_PATH/.
+COPY --chown=node:node ./frontend/. $APP_PATH/.
 WORKDIR $APP_PATH
+RUN ls -l ./package.json
 RUN npm i
+
