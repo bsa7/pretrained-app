@@ -1,4 +1,4 @@
 #!/usr/bin/env bash
 
 echo 'Run all tests'
-python -m pytest
+cd ./api && python -m pytest
