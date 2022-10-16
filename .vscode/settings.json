@@ -1,0 +1,7 @@
+{
+  "eslint.enable": true,
+  "eslint.lintTask.enable": true,
+  "eslint.nodePath": "./frontend/node_modules",
+  "eslint.onIgnoredFiles": "warn",
+  "eslint.run": "onSave"
+}
