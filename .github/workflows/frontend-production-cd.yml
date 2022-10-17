@@ -4,7 +4,7 @@ name: Deploy application
 
 on:
   pull_request:
-    branches: ["develop"]
+    branches: ["main"]
 
 jobs:
   deploy_production:
@@ -28,6 +28,6 @@ jobs:
           port: 22
           script: |
             cd /home/deploy/pretrained-app
-            git pull origin develop
+            git pull origin main
             docker-compose build
             docker-compose up -d
