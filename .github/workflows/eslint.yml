@@ -1,14 +1,12 @@
 name: ESLint
 
 on:
-  push:
-    branches: [ "develop", "main" ]
   pull_request:
-    branches: [ "develop" ]
+    branches: [ "develop", "main" ]
 
 jobs:
-  eslint:
-    name: Run eslint scanning
+  build:
+    name: Run ESLint check
     runs-on: ubuntu-latest
     permissions:
       contents: read
@@ -20,8 +18,12 @@ jobs:
 
       - name: Install ESLint
         run: |
-          npm install eslint
+          pwd
+          ls
+          cd ./frontend
+          npm install eslint -g
+          npm i eslint-config-airbnb
 
       - name: Run ESLint
-        run: npx eslint "src/**" -c .eslintrc.js
-        continue-on-error: true
+        run: |
+          ./script/run_eslint.sh

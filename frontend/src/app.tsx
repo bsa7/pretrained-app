@@ -15,8 +15,9 @@ const styles = StyleSheet.create({
 export default function App() {
   return (
     <View style={styles.container}>
-      <Text>Open up src/app.js to start working on your app!</Text>
-      <StatusBar style="auto"/>
+      <Text>Open file src/app.tsx to start working on your app.</Text>
+      <Text>File structure for frontend will </Text>
+      <StatusBar/>
     </View>
   )
 }
