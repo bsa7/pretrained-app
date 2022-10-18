@@ -13,5 +13,6 @@ COPY script script
 
 RUN cd $APP_PATH/api && \
     pip install setuptools==58.2.0 && \
+    pip install waitress && \
     pip install -r requirements.txt
 EXPOSE 5000

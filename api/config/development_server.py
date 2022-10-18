@@ -1,8 +1,10 @@
+''' Development server '''
+
 from flask import Flask
 from flask_cors import CORS
-from config.routes import Router
+from routes import Router
 
-app = Flask(__name__) # TODO - add yaml configuration
+app = Flask(__name__)
 CORS(app)
 
 router = Router(app)

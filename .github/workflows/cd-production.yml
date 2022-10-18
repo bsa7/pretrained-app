@@ -1,11 +1,10 @@
 # This is a basic workflow to help you get started with Actions
 
-name: Deploy application
+name: Deploy to production
 
 on:
   push:
     branches: ["main"]
-
 
 jobs:
   deploy_production:
