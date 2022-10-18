@@ -6,8 +6,7 @@ services:
       context: .
       dockerfile: api/Dockerfile
     command: bash -c  "cd /home/pn/pretrained-app/api && python config/production_server.py"
-    ports:
-      - '5000:5000'
+    network_mode: host
 
   frontend:
     build:
