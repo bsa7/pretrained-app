@@ -7,7 +7,7 @@ services:
       dockerfile: api/Dockerfile
     volumes:
       - ./api/.:/home/pn/pretrained-app/api/.:Z
-    command: bash -c  "cd /home/pn/pretrained-app/api && python main.py"
+    command: bash -c  "cd /home/pn/pretrained-app/api && python config/development_server.py"
     ports:
       - '5000:5000'
 
