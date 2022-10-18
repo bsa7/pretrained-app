@@ -6,6 +6,7 @@ on:
   push:
     branches: ["main"]
 
+
 jobs:
   deploy_production:
     runs-on: ubuntu-latest
@@ -14,7 +15,7 @@ jobs:
       - name: Wait for tests to succeed
         uses: lewagon/wait-on-check-action@v1.0.0
         with:
-          ref: ${{ github.event.pull_request.head.sha }}
+          ref: ${{ github.event.push.head.sha }}
           check-regexp: 'Run .+? check'
           repo-token: ${{ secrets.GITHUB_TOKEN }}
           wait-interval: 10
