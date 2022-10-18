@@ -1,0 +1,29 @@
+name: ESLint
+
+on:
+  pull_request:
+    branches: [ "develop", "main" ]
+
+jobs:
+  build:
+    name: Run ESLint check
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      security-events: write
+      actions: read
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Install ESLint
+        run: |
+          pwd
+          ls
+          cd ./frontend
+          npm install eslint -g
+          npm i eslint-config-airbnb
+
+      - name: Run ESLint
+        run: |
+          ./script/run_eslint.sh

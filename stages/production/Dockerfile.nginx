@@ -1,0 +1,9 @@
+FROM nginx:stable-alpine
+ENV NGINX_CONFIG_PATH=/etc/nginx
+RUN apk add openssl && \
+    openssl req -x509 -nodes -days 3365 -newkey rsa:2048 -keyout /etc/ssl/private/nginx-selfsigned.key -out /etc/ssl/certs/nginx-selfsigned.crt -subj "/C=US/ST=Some/L=Some/O=Individual/OU=IT Department/CN=some.com" && \
+    openssl dhparam -out /etc/ssl/certs/dhparam.pem 2048
+COPY ./stages/production/nginx/nginx.conf $NGINX_CONFIG_PATH/.
+COPY ./stages/production/nginx/frontend.conf $NGINX_CONFIG_PATH/sites-enabled/frontend.cong
+COPY ./stages/production/nginx/api.conf $NGINX_CONFIG_PATH/sites-enabled/api.cong
+ENTRYPOINT ["nginx", "-g", "daemon off;"]

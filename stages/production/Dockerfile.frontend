@@ -1,0 +1,18 @@
+FROM node:16.18.0
+USER node
+ENV HOME_PATH=/home/node
+ENV APP_PATH=$HOME_PATH/pretrained-app/frontend
+ENV LANG C.UTF-8
+ENV LANGUAGE=en_US:en
+ENV LC_ALL C.UTF-8
+ENV NODE_ENV=production
+RUN echo "PATH=$HOME_PATH/.local/bin/:$PATH" >> $HOME_PATH/.bashrc && \
+    npm config set prefix $HOME_PATH/.local && \
+    npm i -g npm@8.19.2
+
+RUN mkdir -p $APP_PATH
+COPY --chown=node:node ./frontend/. $APP_PATH/.
+WORKDIR $APP_PATH
+RUN npm i && \
+    mkdir -p $APP_PATH/web-build && \
+    npx expo export:web

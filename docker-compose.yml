@@ -1,0 +1,27 @@
+version: '3.7'
+
+services:
+  api:
+    build:
+      context: .
+      dockerfile: api/Dockerfile
+    volumes:
+      - ./api/.:/home/pn/pretrained-app/api/.:Z
+    command: bash -c  "cd /home/pn/pretrained-app/api && python main.py"
+    ports:
+      - '5000:5000'
+
+  frontend:
+    build:
+      context: .
+      dockerfile: frontend/Dockerfile
+    volumes:
+      - ./frontend/.:/home/node/pretrained-app/frontend/.:Z
+    network_mode: host
+    command: bash -c "cd /home/node/pretrained-app/frontend && npx expo start --web"
+
+  nginx:
+    build:
+      context: .
+      dockerfile: docker/nginx/Dockerfile
+    network_mode: host

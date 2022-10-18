@@ -1,0 +1,44 @@
+# This is a basic workflow to help you get started with Actions
+
+name: Deploy application
+
+on:
+  push:
+    branches: ["main"]
+
+jobs:
+  deploy_production:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Wait for tests to succeed
+        uses: lewagon/wait-on-check-action@v1.0.0
+        with:
+          ref: ${{ github.event.pull_request.head.sha }}
+          check-regexp: 'Run .+? check'
+          repo-token: ${{ secrets.GITHUB_TOKEN }}
+          wait-interval: 10
+
+      - name: Deploy using ssh
+        uses: appleboy/ssh-action@master
+        with:
+          host: ${{ secrets.HOST }}
+          username: ${{ secrets.USERNAME }}
+          key: ${{ secrets.PRIVATE_KEY }}
+          port: 22
+          script: |
+            APP_PATH=/home/deploy/pretrained-app
+            cd $APP_PATH
+            pwd
+            ls
+            git add .
+            git commit -m 'tmp'
+            git checkout main
+            git pull origin main
+            cp -f $APP_PATH/stages/production/Dockerfile.api ./api/Dockerfile
+            cp -f $APP_PATH/stages/production/Dockerfile.frontend ./frontend/Dockerfile
+            cp -f $APP_PATH/stages/production/Dockerfile.nginx ./docker/nginx/Dockerfile
+            cp -f $APP_PATH/stages/production/docker-compose.yml ./docker-compose.yml
+            docker image prune -f
+            docker-compose build
+            docker-compose up -d && docker-compose rm -fsv
