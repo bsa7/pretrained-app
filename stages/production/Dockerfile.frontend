@@ -1,16 +1,18 @@
 FROM node:16.18.0
-ENV APP_PATH=/home/node/pretrained-app/frontend
+USER node
+ENV HOME_PATH=/home/node
+ENV APP_PATH=$HOME_PATH/pretrained-app/frontend
 ENV LANG C.UTF-8
 ENV LANGUAGE=en_US:en
 ENV LC_ALL C.UTF-8
 ENV NODE_ENV=production
-RUN npm i -g npm@8.19.2 && \
-    npm i expo-cli -g --legacy-peer-deps
+RUN echo "PATH=$HOME_PATH/.local/bin/:$PATH" >> $HOME_PATH/.bashrc && \
+    npm config set prefix $HOME_PATH/.local && \
+    npm i -g npm@8.19.2
 
-USER node
 RUN mkdir -p $APP_PATH
 COPY --chown=node:node ./frontend/. $APP_PATH/.
 WORKDIR $APP_PATH
-RUN ls -l ./package.json
-RUN npm i
-
+RUN npm i && \
+    mkdir -p $APP_PATH/web-build && \
+    npx expo export:web

@@ -5,9 +5,9 @@ services:
     build:
       context: .
       dockerfile: api/Dockerfile
-    volumes:
-      - ./api/.:/home/pn/pretrained-app/api/.:Z
-    command: bash -c  "cd /home/pn/pretrained-app/api && python main.py"
+    # volumes:
+    #   - ./api/.:/home/pn/pretrained-app/api/.:Z
+    command: bash -c  "cd /home/pn/pretrained-app/api && waitress-serve --call 'flaskr:create_app'"
     ports:
       - '5000:5000'
 
@@ -15,10 +15,8 @@ services:
     build:
       context: .
       dockerfile: frontend/Dockerfile
-    volumes:
-      - ./frontend/.:/home/node/pretrained-app/frontend/.:Z
     network_mode: host
-    command: bash -c "cd /home/node/pretrained-app/frontend && npx expo start --web"
+    command: bash -c "cd /home/node/pretrained-app/frontend && npx serve web-build"
 
   nginx:
     build:

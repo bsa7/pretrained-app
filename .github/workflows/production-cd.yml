@@ -3,7 +3,7 @@
 name: Deploy application
 
 on:
-  pull_request:
+  push:
     branches: ["main"]
 
 jobs:
@@ -27,7 +27,18 @@ jobs:
           key: ${{ secrets.PRIVATE_KEY }}
           port: 22
           script: |
-            cd /home/deploy/pretrained-app
+            APP_PATH=/home/deploy/pretrained-app
+            cd $APP_PATH
+            pwd
+            ls
+            git add .
+            git commit -m 'tmp'
+            git checkout main
             git pull origin main
+            cp -f $APP_PATH/stages/production/Dockerfile.api ./api/Dockerfile
+            cp -f $APP_PATH/stages/production/Dockerfile.frontend ./frontend/Dockerfile
+            cp -f $APP_PATH/stages/production/Dockerfile.nginx ./docker/nginx/Dockerfile
+            cp -f $APP_PATH/stages/production/docker-compose.yml ./docker-compose.yml
+            docker image prune -f
             docker-compose build
-            docker-compose up -d
+            docker-compose up -d && docker-compose rm -fsv
