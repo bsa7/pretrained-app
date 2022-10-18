@@ -13,4 +13,6 @@ RUN echo "PATH=$HOME_PATH/.local/bin/:$PATH" >> $HOME_PATH/.bashrc && \
 RUN mkdir -p $APP_PATH
 COPY --chown=node:node ./frontend/. $APP_PATH/.
 WORKDIR $APP_PATH
-RUN npm i
+RUN npm i && \
+    mkdir -p $APP_PATH/web-build && \
+    npx expo export:web

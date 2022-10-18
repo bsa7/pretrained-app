@@ -8,9 +8,11 @@ USER pn
 RUN mkdir -p $APP_PATH/api/.pytest_cache
 ENV PATH "/home/pn/.local/bin:$PATH"
 WORKDIR $APP_PATH
+RUN pwd && ls -la --color
 COPY . .
 
 RUN cd $APP_PATH/api && \
     pip install setuptools==58.2.0 && \
+    pip install waitress && \
     pip install -r requirements.txt
 EXPOSE 5000
