@@ -5,9 +5,7 @@ services:
     build:
       context: .
       dockerfile: api/Dockerfile
-    # volumes:
-    #   - ./api/.:/home/pn/pretrained-app/api/.:Z
-    command: bash -c  "cd /home/pn/pretrained-app/api && waitress-serve --call 'flaskr:create_app'"
+    command: bash -c  "cd /home/pn/pretrained-app/api && python config/production_server.py"
     ports:
       - '5000:5000'
 
