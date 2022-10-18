@@ -10,4 +10,4 @@ CORS(wsgiapp)
 
 router = Router(wsgiapp)
 
-serve(wsgiapp, listen='0.0.0.0:5000')
+serve(wsgiapp, host = '0.0.0.0', port = '5000', url_scheme = 'https')
