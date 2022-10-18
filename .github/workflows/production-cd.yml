@@ -4,7 +4,7 @@ name: Deploy application
 
 on:
   pull_request:
-    branches: ["main"]
+    branches: ["develop"]
 
 jobs:
   deploy_production:
@@ -27,7 +27,19 @@ jobs:
           key: ${{ secrets.PRIVATE_KEY }}
           port: 22
           script: |
-            cd /home/deploy/pretrained-app
-            git pull origin main
+            APP_PATH=/home/deploy/pretrained-app
+            cd $APP_PATH
+            pwd
+            ls
+            git add .
+            git commit -m 'tmp'
+            git checkout develop
+            git branch -D PP-32-add-nginx-to-proect
+            git fetch
+            git checkout PP-32-add-nginx-to-proect
+            git pull origin PP-32-add-nginx-to-proect
+            cp -f $APP_PATH/stages/production/Dockerfile.api ./api/Dockerfile
+            cp -f $APP_PATH/stages/production/Dockerfile.frontend ./frontend/Dockerfile
+            cp -f $APP_PATH/stages/production/Dockerfile.nginx ./docker/nginx/Dockerfile
             docker-compose build
             docker-compose up -d

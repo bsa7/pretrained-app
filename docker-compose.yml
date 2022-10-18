@@ -18,4 +18,10 @@ services:
     volumes:
       - ./frontend/.:/home/node/pretrained-app/frontend/.:Z
     network_mode: host
-    command: bash -c "cd /home/node/pretrained-app/frontend && npm run web"
+    command: bash -c "cd /home/node/pretrained-app/frontend && npx expo start --web"
+
+  nginx:
+    build:
+      context: .
+      dockerfile: docker/nginx/Dockerfile
+    network_mode: host

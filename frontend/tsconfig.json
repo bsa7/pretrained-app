@@ -4,7 +4,6 @@
     "allowSyntheticDefaultImports": true,
     "esModuleInterop": true,
     "isolatedModules": true,
-    "tsx": "react-native",
     "lib": [
       "es2017"
     ],
