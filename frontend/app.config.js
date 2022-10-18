@@ -3,6 +3,9 @@ module.exports = {
     name: 'PretrainedApp',
     slug: 'PretrainedApp',
     version: '1.0.0',
+    extra: {
+      nodeEnvName: process.env.NODE_ENV,
+    },
     orientation: 'portrait',
     icon: './assets/icon.png',
     userInterfaceStyle: 'light',
