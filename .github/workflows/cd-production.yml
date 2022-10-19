@@ -23,9 +23,10 @@ jobs:
             cd $APP_PATH
             pwd
             ls
+            git checkout main
             git add .
             git commit -m 'tmp'
-            git checkout main
+            git reset --hard origin/main
             git pull origin main
             cp -f $APP_PATH/stages/production/Dockerfile.api ./api/Dockerfile
             cp -f $APP_PATH/stages/production/Dockerfile.frontend ./frontend/Dockerfile
