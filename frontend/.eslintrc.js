@@ -155,6 +155,8 @@ module.exports = {
     // E.g. when it have to pass them in the call chain.
     'react/forbid-prop-types': 'off',
 
+    'react/function-component-definition': [2, { namedComponents: 'arrow-function' }],
+
     'react/jsx-filename-extension': [1, { extensions: ['.tsx'] }],
 
     // Not always convenient.
@@ -168,6 +170,8 @@ module.exports = {
 
     // Gets in the way of BEM.
     'react/jsx-pascal-case': 'off',
+
+    'react/jsx-props-no-spreading': 'off',
 
     // Remove spaces even in front of `/>`, because it's prettier.
     'react/jsx-tag-spacing': ['error', {
@@ -257,9 +261,11 @@ module.exports = {
 
     '@typescript-eslint/ban-ts-comment': 'off',
   },
-
-  // rules: {
-  //   'react/jsx-uses-react': 'error',
-  //   'react/jsx-uses-vars': 'error',
-  // }
+  settings: {
+    'import/resolver': {
+      node: {
+        extensions: ['.ts', '.tsx', '.js', '.jsx', '.d.ts'],
+      },
+    },
+  },
 }
