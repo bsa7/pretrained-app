@@ -102,3 +102,14 @@ test/use_cases/lib/math_utilities_test.py ..                                    
 ============================================================================ 2 passed in 0.02s =============================================================================
 ```
 
+## Useful links
+### API libraries
+* [Flask](https://flask.palletsprojects.com/en/2.2.x/);
+* [MVC Flask](https://github.com/marcuxyz/mvc-flask);
+
+
+### Frontend libraries
+* [expo](https://docs.expo.dev/);
+* [react-native](https://reactnative.dev/);
+* [@react-native-material](https://www.react-native-material.com/docs/components/button);
+* [react-native material examples](https://example.react-native-material.com/);
