@@ -1,5 +1,9 @@
 ## Code style
 
+### Indentation
+Use spaces for indentation.
+Use 2 spaces, please.
+
 ### Methods and classes documentation
 Write module and class documentaion in triple single quotes, like:
 
