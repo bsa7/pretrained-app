@@ -11,13 +11,8 @@ RUN echo "PATH=$HOME_PATH/.local/bin/:$PATH" >> $HOME_PATH/.bashrc && \
     npm i -g npm@8.19.2
 
 RUN mkdir -p $APP_PATH
-# COPY --chown=node:node ./frontend/. $APP_PATH/.
-# COPY ./frontend/package.json $APP_PATH/.
-COPY --chown=node:node . $APP_PATH/.
+COPY --chown=node:node ./frontend/. $APP_PATH/.
 WORKDIR $APP_PATH
-RUN pwd && \
-    ls -la . && \
-    npm i && \
-    npm i webpack && \
+RUN npm i && \
     mkdir -p $APP_PATH/web-build && \
     npx expo export:web

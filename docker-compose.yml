@@ -4,24 +4,36 @@ services:
   api:
     build:
       context: .
-      dockerfile: api/Dockerfile
+      dockerfile: api/Dockerfile.production
     volumes:
       - ./api/.:/home/pn/pretrained-app/api/.:Z
-    command: bash -c  "cd /home/pn/pretrained-app/api && python development_server.py"
+    command: bash -c  "cd /home/pn/pretrained-app/api && python production_server.py"
     ports:
-      - '5000:5000'
+      - "5000:5000"
 
   frontend:
     build:
       context: .
-      dockerfile: frontend/Dockerfile
+      dockerfile: frontend/Dockerfile.production
     volumes:
       - ./frontend/.:/home/node/pretrained-app/frontend/.:Z
     network_mode: host
-    command: bash -c "cd /home/node/pretrained-app/frontend && npx expo start --web"
+    command: bash -c "cd /home/node/pretrained-app/frontend && npx serve web-build"
 
   nginx:
-    build:
-      context: .
-      dockerfile: docker/nginx/Dockerfile
-    network_mode: host
+    image: nginx:1.23.2-alpine
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - ./config/nginx:/etc/nginx/conf.d
+      - ./config/certbot/conf:/etc/letsencrypt
+      - ./config/certbot/www:/var/www/certbot
+    command: "/bin/sh -c 'while :; do sleep 6h & wait $${!}; nginx -s reload; done & nginx -g \"daemon off;\"'"
+
+  certbot:
+    image: certbot/certbot
+    volumes:
+      - ./config/certbot/conf:/etc/letsencrypt
+      - ./config/certbot/www:/var/www/certbot
+    entrypoint: "/bin/sh -c 'trap exit TERM; while :; do certbot renew; sleep 12h & wait $${!}; done;'"

@@ -16,6 +16,7 @@ export const fetchAsync = createAsyncThunk(
   'primeNumber/fetchPrimeNumber',
   async (amount: number) => {
     const response = await fetchPrimeNumber(amount)
+    console.log('fetchAsync#19', { 'response.next_prime': response.next_prime })
     return response.next_prime
   },
 )
@@ -31,7 +32,7 @@ export const primeNumberSlice = createSlice({
       })
       .addCase(fetchAsync.fulfilled, (state, action) => {
         state.status = 'idle'
-        state.value += action.payload
+        state.value = action.payload
       })
       .addCase(fetchAsync.rejected, (state) => {
         state.status = 'failed'

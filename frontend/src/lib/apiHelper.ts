@@ -9,5 +9,6 @@ export const fetchJsonFromAPI = async (location: string, amount: number) => {
   console.log({ url })
   const response = await fetch(url)
   const data = await response.json()
+  console.log({ data })
   return data
 }
