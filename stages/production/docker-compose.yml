@@ -4,19 +4,22 @@ services:
   api:
     build:
       context: .
-      dockerfile: api/Dockerfile
-    command: bash -c  "cd /home/pn/pretrained-app/api && python production_server.py"
+      dockerfile: stages/production/Dockerfile.api
+    image: pretrained-app-api-production
     network_mode: host
 
   frontend:
     build:
       context: .
-      dockerfile: frontend/Dockerfile
+      dockerfile: stages/production/Dockerfile.frontend
+    image: pretrained-app-frontend-production
     network_mode: host
-    command: bash -c "cd /home/node/pretrained-app/frontend && npx serve web-build"
 
   nginx:
     build:
       context: .
-      dockerfile: docker/nginx/Dockerfile
+      dockerfile: stages/production/Dockerfile.nginx
+    image: nginx:1.23.2-alpine
     network_mode: host
+    volumes:
+      - ./stages/production/nginx:/etc/nginx/conf.d

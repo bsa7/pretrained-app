@@ -4,24 +4,25 @@ services:
   api:
     build:
       context: .
-      dockerfile: api/Dockerfile
+      dockerfile: stages/development/Dockerfile.api
+    image: pretrained-app-api-development
     volumes:
-      - ./api/.:/home/pn/pretrained-app/api/.:Z
-    command: bash -c  "cd /home/pn/pretrained-app/api && python development_server.py"
-    ports:
-      - '5000:5000'
+      - ./api:/home/pn/api:Z
+    network_mode: host
+    command: python development_server.py
 
   frontend:
     build:
       context: .
-      dockerfile: frontend/Dockerfile
+      dockerfile: stages/development/Dockerfile.frontend
+    image: pretrained-app-frontend-development
     volumes:
-      - ./frontend/.:/home/node/pretrained-app/frontend/.:Z
+      - ./frontend:/home/node/pretrained-app/frontend:ro
     network_mode: host
     command: bash -c "cd /home/node/pretrained-app/frontend && npx expo start --web"
 
   nginx:
     build:
       context: .
-      dockerfile: docker/nginx/Dockerfile
+      dockerfile: stages/development/Dockerfile.nginx
     network_mode: host
