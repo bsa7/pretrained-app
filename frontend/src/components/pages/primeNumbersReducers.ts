@@ -31,7 +31,7 @@ export const primeNumberSlice = createSlice({
       })
       .addCase(fetchAsync.fulfilled, (state, action) => {
         state.status = 'idle'
-        state.value += action.payload
+        state.value = action.payload
       })
       .addCase(fetchAsync.rejected, (state) => {
         state.status = 'failed'
