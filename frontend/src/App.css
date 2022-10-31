@@ -80,6 +80,10 @@ body {
 
   cursor: pointer;
 }
+.active_card {
+  background-image: linear-gradient(62deg, #fbab7e 0%, #f7ce68 100%);
+}
+/* object detection modal */
 .object-detection {
   display: flex;
   height: 100vh;
@@ -98,6 +102,15 @@ body {
 .url-btn {
   width: 40rem;
   padding: 10px;
+}
+.image_holder {
+  display: flex;
+  flex-direction: row;
+  height: 80vh;
+  justify-content: center;
+}
+.image_holder img {
+  width: 30rem;
 }
 
 /* translator modal */
