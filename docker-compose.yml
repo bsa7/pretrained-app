@@ -17,7 +17,7 @@ services:
       dockerfile: stages/development/Dockerfile.frontend
     image: pretrained-app-frontend-development
     volumes:
-      - ./frontend:/home/node/pretrained-app/frontend:ro
+      - ./frontend:/home/node/pretrained-app/frontend:Z
     network_mode: host
     command: bash -c "cd /home/node/pretrained-app/frontend && npx expo start --web"
 
