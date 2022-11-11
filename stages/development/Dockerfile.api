@@ -1,4 +1,4 @@
-FROM nikolaik/python-nodejs:latest
+FROM nikolaik/python-nodejs:python3.10-nodejs18
 
 USER pn
 
@@ -12,7 +12,8 @@ ENV PATH="${PATH}:/home/pn/.local/bin"
 WORKDIR $APP_PATH
 EXPOSE 5000
 COPY --chown=pn:pn ./api/requirements.txt ./requirements.txt
-RUN pip install setuptools==65.5.0 && \
+RUN pip install --upgrade pip && \
+    pip install setuptools==65.5.1 && \
     pip install numpy && \
     pip install waitress && \
     pip install -r requirements.txt
