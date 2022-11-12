@@ -1,4 +1,5 @@
-''' API Router '''
-from mvc_flask import Router
+''' API Router settings file '''
 
-Router.get('/api/prime_numbers', 'primenumbers#show')
+from app.lib.router import get
+
+get('/prime_numbers', 'primenumbers#show')

@@ -25,6 +25,19 @@ It will create children folder `~/projects/pretrained-app`.
 
 > install [chrome](https://www.google.com/chrome/) and use it in the future.
 
+> install [asdf](https://asdf-vm.com/) - command-line tool to manage versions of python, nodejs and many more:
+```bash
+git clone https://github.com/asdf-vm/asdf.git ~/.asdf
+cd ~/.asdf
+git checkout "$(git describe --abbrev=0 --tags)"
+echo -e '\n. $HOME/.asdf/asdf.sh' >> ~/.bashrc
+echo -e '\n. $HOME/.asdf/completions/asdf.bash' >> ~/.bashrc
+asdf plugin-add python
+asdf plugin-add nodejs
+asdf install
+```
+This commands sequence prepared your environment to run parts of your application outside of docker containers. It can be useful for some developers.
+
 ### Build application containers
 cd into our **project folder**:
 

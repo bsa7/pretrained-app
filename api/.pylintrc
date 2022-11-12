@@ -149,6 +149,7 @@ disable=raw-checker-failed,
         locally-disabled,
         file-ignored,
         suppressed-message,
+        import-error,
         useless-suppression,
         deprecated-pragma,
         use-symbolic-message-instead
