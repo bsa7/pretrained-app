@@ -96,9 +96,9 @@ Your code has been rated at 10.00/10
 ## Run tests
 All tests for application stored in `./test` folder. You can run single test and, of course, all tests in suite.
 
-### To run all tests in single file:
+### To run all tests:
 ```bash
-./docker/run_tests.sh
+./script/run_tests.sh
 ```
 
 If all going fine, you would see output in console, like that:
@@ -114,6 +114,12 @@ test/use_cases/lib/math_utilities_test.py ..                                    
 
 ============================================================================ 2 passed in 0.02s =============================================================================
 ```
+### To run exactly one test file:
+```bash
+./script/run_tests.sh ./test/controllers/welcome_controller_test.py
+```
+> Note: you could omit first level folder in path, relative to project's root. In above example, the file, which placed in `./api/test/controllers/welcome_controller_test.py` would become as `./test/controllers/welcome_controller_test.py`
+
 
 ## Useful links
 ### API libraries
