@@ -1,4 +1,4 @@
-export const applicationSettings = {
+export const APPLICATION_SETTINGS = {
   production: {
     apiHost: 'https://pretrained-app.jsdev.cyou/api',
   },
