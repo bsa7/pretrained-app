@@ -3,11 +3,13 @@
 from flask import Flask
 from mvc_flask import FlaskMVC
 from flask_cors import CORS
+from config.initializers.logger import initialize_log
 
 class Application:
   '''This is main application part'''
   def __init__(self, name):
     self.__name = name
+    initialize_log()
     self.initialize_core()
 
   def initialize_core(self):

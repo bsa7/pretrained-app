@@ -1,5 +1,6 @@
 ''' This file contains class, iterates over prime numbers '''
 import primesieve
+import logging
 
 class PrimeNumbersIterator:
   ''' Prime numbers iterator '''
@@ -12,5 +13,5 @@ class PrimeNumbersIterator:
 
   def __next__(self):
     self.__current_prime = primesieve.n_primes(1, self.__current_prime + 1)[0]
-    print(f'next: {self.__current_prime=}')
+    logging.info(f'next: {self.__current_prime}')
     return self.__current_prime
