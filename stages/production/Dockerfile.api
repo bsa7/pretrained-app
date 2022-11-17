@@ -9,6 +9,7 @@ ENV MODE=production
 
 ENV APP_PATH=/home/pn/api
 ENV PATH="${PATH}:/home/pn/.local/bin"
+ENV FLASK_ENV=production
 WORKDIR $APP_PATH
 EXPOSE 5000
 COPY --chown=pn:pn ./api/ ./
