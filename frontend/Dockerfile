@@ -8,7 +8,10 @@ RUN npm i -g npm@8.19.2 && \
     npm i eslint -g
 
 USER node
-RUN mkdir -p $APP_PATH
+RUN mkdir -p $APP_PATH/node_modules
+RUN mkdir -p $APP_PATH/.expo
+RUN mkdir -p $APP_PATH/.expo-shared
+RUN mkdir -p $APP_PATH/web-build
 COPY ./frontend/package.json $APP_PATH/.
 WORKDIR $APP_PATH
 RUN npm i
