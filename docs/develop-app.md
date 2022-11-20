@@ -50,7 +50,7 @@ install required dependencies:
 docker-compose build
 ```
 
-## Run application
+## <a name="run-application"></a>Run application
 Application runs as main endpoint, based on Streamlit and second part - frontend. Streamlit and Frontend parts are linked, shares data and working together.
 
 To run api and frontend part open a new terminal and execute command:

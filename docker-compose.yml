@@ -10,7 +10,7 @@ services:
       - ./api:/home/pn/api:Z
     network_mode: host
     environment:
-      - FLASK_ENV=development
+      - API_ENV=development
     command: python development_server.py
 
   frontend:
