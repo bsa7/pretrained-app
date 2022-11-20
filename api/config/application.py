@@ -19,6 +19,7 @@ class Application:
     mvc_app.init_app(self.app(), path = 'app')
     CORS(self.app())
 
+  @property
   def app(self):
     '''Return app'''
     return self.__app
