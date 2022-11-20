@@ -1,23 +1,21 @@
 ''' Initialize application '''
 
 from flask import Flask
-from mvc_flask import FlaskMVC
-from flask_cors import CORS
+from monkeypatches.monkeypatched_mvc_flask import MonkeypatchedFlaskMVC
 from config.initializers.logger import initialize_log
 
 class Application:
   '''This is main application part'''
   def __init__(self, name):
     self.__name = name
-    initialize_log()
+    self.__app = Flask(self.__name, template_folder = './app/views')
+    self.app.config['EXPLAIN_TEMPLATE_LOADING'] = True
     self.initialize_core()
+    initialize_log()
 
   def initialize_core(self):
     '''Initializes mvc flask app'''
-    self.__app = Flask(self.__name)
-    mvc_app = FlaskMVC()
-    mvc_app.init_app(self.app(), path = 'app')
-    CORS(self.app())
+    MonkeypatchedFlaskMVC(self.app, path = 'app')
 
   @property
   def app(self):
