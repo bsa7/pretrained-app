@@ -50,8 +50,8 @@ install required dependencies:
 docker-compose build
 ```
 
-## Run application
-Application runs as main endpoint, based on Streamlit and second part - frontend. Streamlit and Frontend parts are linked, shares data and working together.
+## <a name="run-application"></a>Run application
+Application runs as main endpoint, based on Flask and second part - frontend. Flask and Frontend parts are linked, shares data and working together.
 
 To run api and frontend part open a new terminal and execute command:
 ```bash
@@ -76,6 +76,29 @@ Also, you wolud to open frontend application on your Android on Ios device.
 * Follow these [instructions](./mobile-development.md#android) to open android app in development mode.
 * Follow these [instructions](./mobile-development.md#ios) to open ios app in development mode.
 
+### If you need only exactly services
+For many developers are not usefull to run all applications in docker. Instead this you would run services explicitly
+For example, if you need to run api in other terminal as local application, then:
+```bash
+# Run in first terminal only nginx backend and expo frontend:
+docker-compose up nginx frontend
+# Run in second terminal api application:
+./script/run_api_dev.sh
+```
+
+## Open application in browser
+### Setting up your local /etc/hosts
+Add a folowing lines into end of file `/etc/hosts`:
+```
+0.0.0.0 dev.pretrained-app.ru
+0.0.0.0 dev-frontend.pretrained-app.ru
+```
+
+To open backend part folow that url: `https://dev.pretrained-app.ru/welcome`. You would see that picture:
+![Backend Welcome page](./assets/backend-welcome-page.png)
+
+To open frontend part follow that url: `https://dev-frontend.pretrained-app.ru/`. You would to see that:
+![Frontend Index page](./assets/frontend-welcome-page.png)
 
 ## Run linters
 ### Python linter
@@ -96,29 +119,27 @@ Your code has been rated at 10.00/10
 ## Run tests
 All tests for application stored in `./test` folder. You can run single test and, of course, all tests in suite.
 
-### To run all tests in single file:
+### To run all tests:
 ```bash
-./docker/run_tests.sh
+./script/run_tests.sh
 ```
 
 If all going fine, you would see output in console, like that:
+
+![Ward success results example](./assets/ward-results-demo.png)
+
+### To run exactly one test file:
 ```bash
-Creating pretrained-app_app_run ... done
-Run all tests
-=========================================================================== test session starts ============================================================================
-platform linux -- Python 3.10.7, pytest-7.1.3, pluggy-1.0.0
-rootdir: /app, configfile: pytest.ini, testpaths: test
-collected 2 items
-
-test/use_cases/lib/math_utilities_test.py ..                                                                                                                         [100%]
-
-============================================================================ 2 passed in 0.02s =============================================================================
+./script/run_tests.sh ./test/controllers/welcome_controller_test.py
 ```
+> Note: you could omit first level folder in path, relative to project's root. In above example, the file, which placed in `./api/test/controllers/welcome_controller_test.py` would become as `./test/controllers/welcome_controller_test.py`
+
 
 ## Useful links
 ### API libraries
 * [Flask](https://flask.palletsprojects.com/en/2.2.x/);
 * [MVC Flask](https://github.com/marcuxyz/mvc-flask);
+* [Ward](https://ward.readthedocs.io/en/latest/);
 
 
 ### Frontend libraries

@@ -6,6 +6,8 @@ ENV APP_PATH=/home/pn/pretrained-app/
 
 USER pn
 RUN mkdir -p $APP_PATH/api/.pytest_cache
+RUN mkdir -p $APP_PATH/api/log
+RUN touch $APP_PATH/api/log/test.log
 ENV PATH "/home/pn/.local/bin:$PATH"
 WORKDIR $APP_PATH
 COPY api/requirements.txt api/.

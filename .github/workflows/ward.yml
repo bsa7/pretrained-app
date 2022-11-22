@@ -1,4 +1,4 @@
-name: Pytest
+name: Ward
 
 on:
   pull_request:
@@ -6,7 +6,7 @@ on:
 
 jobs:
   build:
-    name: Run Pytest check
+    name: Run Ward check
     runs-on: ubuntu-latest
     strategy:
       matrix:
@@ -20,8 +20,9 @@ jobs:
     - name: Install dependencies
       run: |
         python -m pip install --upgrade pip
+        mkdir -p ./api/log
+        touch ./api/log/test.log
         pip install -r ./api/requirements.txt
-        pip install pytest
-    - name: Testing the code with pytest
+    - name: Testing the code with ward
       run: |
         ./script/run_tests.sh

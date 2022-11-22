@@ -9,6 +9,8 @@ services:
     volumes:
       - ./api:/home/pn/api:Z
     network_mode: host
+    environment:
+      - API_ENV=development
     command: python development_server.py
 
   frontend:
