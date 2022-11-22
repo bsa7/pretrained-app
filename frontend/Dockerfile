@@ -1,8 +1,11 @@
 FROM node:16.18.0
 ENV APP_PATH=/home/node/pretrained-app/frontend
-ENV LANG C.UTF-8
-ENV LANGUAGE=en_US:en
-ENV LC_ALL C.UTF-8
+
+RUN apt update && apt -y install locales && locale-gen ru_RU.UTF-8
+ENV LANG ru_RU.UTF-8
+ENV LANGUAGE ru_RU:en
+ENV LC_ALL ru_RU.UTF-8
+
 RUN npm i -g npm@8.19.2 && \
     npm i expo-cli -g --legacy-peer-deps && \
     npm i eslint -g
