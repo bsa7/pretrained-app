@@ -2,7 +2,7 @@
 
 ![ESLint](https://github.com/bsa7/pretrained-app/actions/workflows/eslint.yml/badge.svg)&nbsp;
 ![Pylint](https://github.com/bsa7/pretrained-app/actions/workflows/pylint.yml/badge.svg)&nbsp;
-![Pytest](https://github.com/bsa7/pretrained-app/actions/workflows/pytest.yml/badge.svg)&nbsp;
+![Ward](https://github.com/bsa7/pretrained-app/actions/workflows/ward.yml/badge.svg)&nbsp;
 ![Deploy production](https://github.com/bsa7/pretrained-app/actions/workflows/cd-production.yml/badge.svg?branch=main)
 ## Working example
 Follow this [link](https://pretrained-app.jsdev.cyou) to open application.

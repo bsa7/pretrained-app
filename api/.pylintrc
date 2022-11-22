@@ -161,6 +161,9 @@ disable=raw-checker-failed,
 enable=c-extension-no-member
 
 
+[pylint.FORMAT]
+disable=logging-fstring-interpolation
+
 [LOGGING]
 
 # The type of string formatting that logging methods do. `old` means using %

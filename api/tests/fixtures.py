@@ -6,10 +6,10 @@ from tests.base.application_test_case import Application
 @fixture
 def app_context():
   ''' This fixture used as mock of your application '''
-  app = Application().app
+  app = Application(__name__).app
   app.testing = True
-  app_contenxt = app.test_request_context()
-  app_contenxt.push()
+  context = app.test_request_context()
+  context.push()
   return app
 
 @fixture
@@ -22,4 +22,4 @@ def client(context = app_context):
 def browser(context = app_context):
   ''' This fixture implement browser instance to feature testing '''
   with context.test_client():
-    yield Browser('flask', app=context)
+    yield Browser('flask', app = context)

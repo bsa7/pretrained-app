@@ -1,14 +1,13 @@
 ''' This is test case for welcome index page '''
 
-# from flask import url_for
-# from ward import each, test
-# from tests.fixtures import client, browser
+from flask import url_for
+from ward import each, test
+from tests.fixtures import client, browser
 
-# @test('should return status 200 for GET (INDEX)', tags=['request'])
-# def _(client = client, resource = each('welcome')):
-#     response = client.get(url_for(f'{resource}.index'))
-
-#     assert response.status_code == 200
+@test('should return status 200 for GET (INDEX)', tags=['request'])
+def _(client = client, resource = each('welcome')):
+  response = client.get(url_for(f'{resource}.index'))
+  assert response.status_code == 200
 
 
 # import unittest
