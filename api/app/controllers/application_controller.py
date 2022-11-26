@@ -1,5 +1,6 @@
 ''' Implements abstract base API controller '''
 
+import i18n
 import inspect
 import logging
 import re
@@ -10,6 +11,7 @@ class ApplicationController:
   def __init__(self):
     ''' Initializes the application controller '''
     self.__layout = None
+    self.__initialize_i18n()
 
   def _response(self, **payload) -> dict:
     ''' This is wrapper for controller response '''
@@ -32,11 +34,11 @@ class ApplicationController:
     '''Returns a name of controller's layout.'''
     return self.__layout
 
-  def render(self, layout = True):
+  def render(self, layout = True, locals = {}):
     '''render html response with or without layout'''
     template_name = f'{self.__controller_name}/{self.__action_name}.{self.__template_format}'
     logging.info(f'Controller {self.__controller_name}#{self.__action_name}, render {template_name=}')
-    return render_template(template_name)
+    return render_template(template_name, locals = locals)
 
   def request_file(self, name) -> dict:
     ''' Returns files, attached in post request '''
@@ -67,3 +69,8 @@ class ApplicationController:
     ''' Initialized application template format '''
     # TODO - will use haml
     return 'html'
+
+  def __initialize_i18n(self):
+    ''' Initializes i18n '''
+    i18n.config.set('locale', 'en')
+    self._i18n = i18n

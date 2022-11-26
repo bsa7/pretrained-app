@@ -2,7 +2,7 @@
 <title>{% block title %}{% endblock %} - Flaskr</title>
 <link rel="stylesheet" href="{{ url_for('static', filename='stylesheets/application.css') }}">
 <nav>
-  <h1>Flaskr</h1>
+  <h1>{{locals['title']}}</h1>
 </nav>
 <section class="content">
   <header>

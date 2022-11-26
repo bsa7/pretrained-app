@@ -1,15 +1,16 @@
 ''' This file defines a fixtures to dry your tests '''
 from ward import fixture
 from splinter import Browser
-from tests.base.application_test_case import Application
+from config.application import Application
 
 @fixture
 def app_context():
   ''' This fixture used as mock of your application '''
-  app = Application(__name__).app
+  app = Application().app
   app.testing = True
   context = app.test_request_context()
   context.push()
+  print(f'app_context#9 *************************************{app=}')
   return app
 
 @fixture
