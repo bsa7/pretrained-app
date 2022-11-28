@@ -6,4 +6,4 @@ dist
 .expo-shared
 tmp
 .vscode
-api/log
+api/log/*.log
