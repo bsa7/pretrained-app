@@ -1,0 +1,9 @@
+{% extends 'layouts/application.html' %}
+{% block content %}
+<h2>Результаты классификации объекта на изображении.</h2>
+<div>
+  <h3>Ваше изображение:</h3>
+  <div><span>Судя по всему, на изображении находится </span><span>{{locals['recognition_result']}}</span></div>
+  <img src="{{locals['image_url']}}" />
+</div>
+{% endblock content %}
