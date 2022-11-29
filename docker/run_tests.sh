@@ -3,4 +3,4 @@
 set -x
 set -e
 
-docker-compose run --rm api ./script/run_tests.sh
+docker-compose run --rm api bash -l -c "API_ENV=test ward $@"

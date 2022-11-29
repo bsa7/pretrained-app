@@ -1,0 +1,23 @@
+FROM nikolaik/python-nodejs:python3.10-nodejs18
+
+USER pn
+
+ENV LANG=C.UTF-8
+ENV LANGUAGE=en_US:en
+ENV LC_ALL=C.UTF-8
+ENV MODE=production
+
+ENV APP_PATH=/home/pn/api
+RUN mkdir -p $APP_PATH/log
+RUN touch $APP_PATH/log/staging.log
+ENV PATH="${PATH}:/home/pn/.local/bin"
+ENV API_ENV=production
+WORKDIR $APP_PATH
+EXPOSE 5000
+COPY --chown=pn:pn ./api/ ./
+RUN pip install setuptools==65.5.0 && \
+    pip install --upgrade pip && \
+    pip install numpy && \
+    pip install waitress && \
+    pip install -r requirements.txt
+CMD ["python3", "production_server.py"]

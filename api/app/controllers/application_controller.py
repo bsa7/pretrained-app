@@ -17,7 +17,7 @@ class ApplicationController:
 
   def _params(self) -> dict:
     ''' Returns rest parameters '''
-    return request.args
+    return dict(request.args)
 
   def _files(self) -> dict:
     ''' Returns files, attached in post request '''
@@ -32,11 +32,11 @@ class ApplicationController:
     '''Returns a name of controller's layout.'''
     return self.__layout
 
-  def render(self, layout = True):
+  def render(self, layout = True, locals = {}):
     '''render html response with or without layout'''
     template_name = f'{self.__controller_name}/{self.__action_name}.{self.__template_format}'
     logging.info(f'Controller {self.__controller_name}#{self.__action_name}, render {template_name=}')
-    return render_template(template_name)
+    return render_template(template_name, locals = locals)
 
   def request_file(self, name) -> dict:
     ''' Returns files, attached in post request '''
