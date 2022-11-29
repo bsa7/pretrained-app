@@ -1,5 +1,6 @@
 #!/usr/bin/env bash
-rsync --progress -azhr \
+rsync -e "ssh -o StrictHostKeyChecking=no" \
+      --progress -azhr \
       --exclude ".git/*" \
       --exclude "api/log/*" \
       --exclude "frontend/node_modules/*" \
