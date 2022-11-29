@@ -1,0 +1,25 @@
+version: '3.7'
+
+services:
+  api:
+    build:
+      context: .
+      dockerfile: stages/staging/Dockerfile.api
+    image: pretrained-app-api-staging
+    network_mode: host
+
+  frontend:
+    build:
+      context: .
+      dockerfile: stages/staging/Dockerfile.frontend
+    image: pretrained-app-frontend-staging
+    network_mode: host
+
+  nginx:
+    build:
+      context: .
+      dockerfile: stages/staging/Dockerfile.nginx
+    image: nginx:1.23.2-alpine
+    network_mode: host
+    volumes:
+      - ./stages/staging/nginx:/etc/nginx/conf.d
