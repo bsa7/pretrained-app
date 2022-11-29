@@ -19,17 +19,5 @@ jobs:
           key: ${{ secrets.PRIVATE_KEY }}
           port: 22
           script: |
-            APP_PATH=/home/deploy/pretrained-app
-            cd $APP_PATH
-            pwd
-            ls
-            git stash
-            git fetch
-            git checkout main
-            git add .
-            git commit -m 'tmp'
-            git reset --hard origin/main
-            git pull origin main
-            ln -sf stages/production/docker-compose.yml docker-compose.yml
-            docker-compose build
-            docker-compose up -d
+            cd /home/deploy/pretrained-app
+            ./script/deploy_to_production.sh

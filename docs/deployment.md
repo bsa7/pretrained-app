@@ -19,3 +19,7 @@ Deploy to staging server is manual. You would to commit changes or switch to sel
 ```
 
 To have rights for that action, you would to have public deploy key placed in `/home/deploys/.ssh/authorized_keys`.
+
+Staging server have two domain names:
+1. Flask application accessible by link [https://staging-pretrained-app.jsdev.cyou/welcome](https://staging-pretrained-app.jsdev.cyou/welcome);
+2. Nodejs application accessible by [https://staging-pretrained-app-frontend.jsdev.cyou/](https://staging-pretrained-app-frontend.jsdev.cyou/);
