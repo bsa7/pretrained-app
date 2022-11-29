@@ -1,9 +1,16 @@
 {% extends 'layouts/application.html' %}
+
+{% block head %}
+<link rel="stylesheet" href="{{ url_for('static', filename='stylesheets/image_classifier.css') }}">
+{% endblock head %}
+
 {% block content %}
 <h2>Результаты классификации объекта на изображении.</h2>
-<div>
-  <h3>Ваше изображение:</h3>
-  <div><span>Судя по всему, на изображении находится </span><span>{{locals['recognition_result']}}</span></div>
-  <img src="{{locals['image_url']}}" />
+<div class="result-block">
+  <div class="result-description">
+    <span>Судя по всему, {{locals['recognition_result']}}</span>
+    <a class="link" href="/image_classifier">Классифицировать другое изображение</a>
+  </div>
+  <img class="source-image" src="{{locals['image_url']}}" />
 </div>
 {% endblock content %}

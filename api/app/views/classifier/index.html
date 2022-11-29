@@ -1,13 +1,22 @@
 {% extends 'layouts/application.html' %}
+
+{% block head %}
+<link rel="stylesheet" href="{{ url_for('static', filename='stylesheets/image_classifier.css') }}">
+{% endblock head %}
+
 {% block content %}
-<h2>Классификация объектов на изображении.</h2>
+<h2 class="header">Классификация объектов на изображении.</h2>
+
+<div class="description">
+  <p>Введите адрес изображения в поле ввода и нажмите кнопку "Выполнить". Будет выполнена классификация объектов на изображении.</p>
+</div>
 
 <form action="show" method="get">
   <p>
-    <label for="image_url">Введите url изображения</label>
-    <input type="text" name="image_url" value="https://akulovka.com/wa-data/public/blog/img/1-5.jpg" />
+    <label for="image_url">Введите url изображения:</label>
+    <input class="form-field long-text" type="text" name="image_url" value="https://akulovka.com/wa-data/public/blog/img/1-5.jpg" />
   </p>
-  <input type="submit" value = "submit" />
+  <input class="btn form-field" type="submit" value = "Выполнить" />
 </form>
 
 {% endblock content %}

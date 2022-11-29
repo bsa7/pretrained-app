@@ -18,9 +18,9 @@ def _(client=client, resource=each('classifier')):
 @test('На странице /image_classifier отображается кнопка submit"')
 def _(client=client, resource=each('classifier')):
   response = client.get(url_for(f'{resource}.index'))
-  assert '<input type="submit" value = "submit" />' in response.text
+  assert 'type="submit" value = "Выполнить"' in response.text
 
 @test('На странице /image_classifier находится поле ввода для адреса изображения')
 def _(client=client, resource=each('classifier')):
   response = client.get(url_for(f'{resource}.index'))
-  assert '<input type="text" name="image_url" value="https://akulovka.com/wa-data/public/blog/img/1-5.jpg" />' in response.text
+  assert 'value="https://akulovka.com/wa-data/public/blog/img/1-5.jpg"' in response.text

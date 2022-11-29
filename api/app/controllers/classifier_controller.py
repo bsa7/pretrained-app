@@ -16,8 +16,6 @@ class ClassifierController(ApplicationController):
 
   def show(self) -> dict:
     params = self.show_params()
-    logging.info(f'------------------------- Params: {params=} -------------------------------')
-
     image_url = params.get('image_url')
     recognition_result = self.object_classifier.call(image_url)
 

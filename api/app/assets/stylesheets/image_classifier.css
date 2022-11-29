@@ -1,0 +1,57 @@
+.btn {
+  background-color: lightgray;
+  color: navy;
+}
+
+.btn:hover {
+  background-color: darkgray;
+  cursor: pointer;
+}
+
+.link {
+  text-decoration: none;
+  color: black;
+  padding: 12px 0;
+  font-size: 16px;
+}
+
+.link:visited {
+  color: black;
+}
+
+.link:hover {
+  color: green;
+}
+
+.form-field {
+  padding: 8px 12px;
+  border-radius: 4px;
+}
+
+.long-text {
+  width: 450px;
+}
+
+.header {
+  text-align: center;
+}
+
+.result-block {
+  width: 100px;
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+}
+
+.source-image {
+  display: flex;
+  width: 500px;
+  height: auto;
+}
+
+.result-description {
+  display: flex;
+  flex-direction: column;
+  min-width: 500px;
+  display: flex;
+}
