@@ -1,0 +1,17 @@
+FROM node:alpine3.16
+
+ENV NODE_ENV=production
+ENV LANG=C.UTF-8
+ENV LANGUAGE=en_US:en
+ENV LC_ALL=C.UTF-8
+ENV NODE_OPTIONS=--openssl-legacy-provider
+
+ENV APP_PATH=/usr/app/frontend
+WORKDIR $APP_PATH
+EXPOSE 3000
+COPY ./frontend/ ./
+RUN npm --version && \
+    node --version && \
+    npm i && \
+    npx expo export:web
+CMD ["npx", "serve", "web-build"]

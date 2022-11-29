@@ -18,3 +18,6 @@ Our application collaborated on pure entusiasm, so we have no abilities to by ex
 
 ## Git flow. Team agreements.
 [Here](./docs/git-flow.md) is a document on working with the source code of the application.
+
+## Deployment
+[Here](./docs/deployment.md) you can read information about deployment process to production and staging hosts.
