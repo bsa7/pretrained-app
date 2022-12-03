@@ -69,7 +69,7 @@ class ModelImageVisualizer:
         results_dir:Path = None,
         figsize: Tuple[int, int] = (20, 20),
         render_factor: int = None,
-        
+
         display_render_factor: bool = False,
         compare: bool = False,
         post_process: bool = True,
@@ -77,16 +77,17 @@ class ModelImageVisualizer:
     ) -> Path:
         img = self._get_image_from_url(url)
         img.save(path)
-        return self.plot_transformed_image(
-            path=path,
-            results_dir=results_dir,
-            figsize=figsize,
-            render_factor=render_factor,
-            display_render_factor=display_render_factor,
-            compare=compare,
-            post_process = post_process,
-            watermarked=watermarked,
-        )
+        return path
+        # return self.plot_transformed_image(
+        #     path=path,
+        #     results_dir=results_dir,
+        #     figsize=figsize,
+        #     render_factor=render_factor,
+        #     display_render_factor=display_render_factor,
+        #     compare=compare,
+        #     post_process = post_process,
+        #     watermarked=watermarked,
+        # )
 
     def plot_transformed_image(
         self,
@@ -233,7 +234,7 @@ class VideoColorizer:
             logging.error('stderr:' + e.stderr.decode('UTF-8'))
             raise e
         except Exception as e:
-            logging.error('Failed to instantiate ffmpeg.probe.  Details: {0}'.format(e), exc_info=True)   
+            logging.error('Failed to instantiate ffmpeg.probe.  Details: {0}'.format(e), exc_info=True)
             raise e
 
     def _get_fps(self, source_path: Path) -> str:
@@ -280,7 +281,7 @@ class VideoColorizer:
             logging.error('stderr:' + e.stderr.decode('UTF-8'))
             raise e
         except Exception as e:
-            logging.error('Errror while extracting raw frames from source video.  Details: {0}'.format(e), exc_info=True)   
+            logging.error('Errror while extracting raw frames from source video.  Details: {0}'.format(e), exc_info=True)
             raise e
 
     def _colorize_raw_frames(
@@ -313,8 +314,8 @@ class VideoColorizer:
         fps = self._get_fps(source_path)
 
         process = (
-            ffmpeg 
-                .input(str(colorframes_path_template), format='image2', vcodec='mjpeg', framerate=fps) 
+            ffmpeg
+                .input(str(colorframes_path_template), format='image2', vcodec='mjpeg', framerate=fps)
                 .output(str(colorized_path), crf=17, vcodec='libx264')
                 .global_args('-hide_banner')
                 .global_args('-nostats')
@@ -329,7 +330,7 @@ class VideoColorizer:
             logging.error('stderr:' + e.stderr.decode('UTF-8'))
             raise e
         except Exception as e:
-            logging.error('Errror while building output video.  Details: {0}'.format(e), exc_info=True)   
+            logging.error('Errror while building output video.  Details: {0}'.format(e), exc_info=True)
             raise e
 
         result_path = self.result_folder / source_path.name
@@ -477,7 +478,7 @@ def show_video_in_notebook(video_path: Path):
     encoded = base64.b64encode(video)
     ipythondisplay.display(
         HTML(
-            data='''<video alt="test" autoplay 
+            data='''<video alt="test" autoplay
                 loop controls style="height: 400px;">
                 <source src="data:video/mp4;base64,{0}" type="video/mp4" />
              </video>'''.format(

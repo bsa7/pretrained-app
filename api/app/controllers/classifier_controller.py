@@ -1,5 +1,7 @@
 ''' Prime numbers controller '''
 
+# PP-27 Скопируй этот контроллер в свой с именем image_colorizer_controller.py, класс тоже переименуй
+
 import logging
 from app.controllers.application_controller import ApplicationController
 from app.use_cases.classifier.object_classifier import ObjectClassifier
