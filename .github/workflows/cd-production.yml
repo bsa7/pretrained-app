@@ -11,13 +11,24 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Deploy using ssh
-        uses: appleboy/ssh-action@master
+      - uses: actions/checkout@v2
+      - name: rsync deployments
+        uses: burnett01/rsync-deployments@5.2.1
         with:
-          host: ${{ secrets.HOST }}
-          username: ${{ secrets.USERNAME }}
-          key: ${{ secrets.PRIVATE_KEY }}
-          port: 22
-          script: |
-            cd /home/deploy/pretrained-app
-            ./script/deploy_to_production.sh
+          switches: -avzr --delete --exclude=".git/*" --exclude="api/log/*" --exclude="frontend/node_modules/*" --exclude="tmp/" --filter=""
+          path: ./
+          remote_path: /home/deploy/pretrained-app/
+          remote_host: pretrained-app.jsdev.cyou
+          remote_port: 22
+          remote_user: deploy
+          remote_key: ${{ secrets.DEPLOY_KEY }}
+      # - name: Deploy using ssh
+      #   uses: appleboy/ssh-action@master
+      #   with:
+      #     host: ${{ secrets.HOST }}
+      #     username: ${{ secrets.USERNAME }}
+      #     key: ${{ secrets.PRIVATE_KEY }}
+      #     port: 22
+      #     script: |
+      #       cd /home/deploy/pretrained-app
+      #       ./script/deploy_to_production.sh
