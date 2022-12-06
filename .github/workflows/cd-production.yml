@@ -11,13 +11,30 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Deploy using ssh
+      - uses: actions/checkout@v2
+      - name: rsync deployments
+        uses: burnett01/rsync-deployments@5.2.1
+        with:
+          switches: -avzr --delete --exclude=".git/*" --exclude="api/log/*" --exclude="frontend/node_modules/*" --exclude="tmp/" --filter=""
+          path: ./
+          remote_path: /home/${{ secrets.USERNAME }}/pretrained-app/
+          remote_host: ${{ secrets.HOST }}
+          remote_port: 22
+          remote_user: ${{ secrets.USERNAME }}
+          remote_key: ${{ secrets.PRIVATE_KEY }}
+
+      - name: rebuild && restart docker containers
         uses: appleboy/ssh-action@master
         with:
+          command_timeout: 200m
           host: ${{ secrets.HOST }}
-          username: ${{ secrets.USERNAME }}
           key: ${{ secrets.PRIVATE_KEY }}
           port: 22
+          username: ${{ secrets.USERNAME }}
           script: |
-            cd /home/deploy/pretrained-app
-            ./script/deploy_to_production.sh
+            APP_PATH=/home/${{ secrets.USERNAME }}/pretrained-app
+            STAGE=production
+            cd $APP_PATH
+            ln -sf $APP_PATH/stages/$STAGE/docker-compose.yml $APP_PATH/docker-compose.yml
+            docker-compose build
+            docker-compose up -d
