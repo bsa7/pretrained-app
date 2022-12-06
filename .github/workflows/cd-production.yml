@@ -18,10 +18,10 @@ jobs:
           switches: -avzr --delete --exclude=".git/*" --exclude="api/log/*" --exclude="frontend/node_modules/*" --exclude="tmp/" --filter=""
           path: ./
           remote_path: /home/deploy/pretrained-app/
-          remote_host: pretrained-app.jsdev.cyou
+          remote_host: ${{ secrets.HOST }}
           remote_port: 22
-          remote_user: deploy
-          remote_key: ${{ secrets.DEPLOY_KEY }}
+          remote_user: ${{ secrets.USER_NAME }}
+          remote_key: ${{ secrets.PRIVATE_KEY }}
       # - name: Deploy using ssh
       #   uses: appleboy/ssh-action@master
       #   with:
