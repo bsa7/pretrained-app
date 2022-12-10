@@ -3,6 +3,7 @@ ENV LANG C.UTF-8
 ENV LANGUAGE=en_US:en
 ENV LC_ALL C.UTF-8
 ENV APP_PATH=/home/pn/pretrained-app/
+RUN sudo apt install portaudio19-dev
 
 USER pn
 RUN mkdir -p $APP_PATH/api/.pytest_cache

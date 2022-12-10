@@ -1,0 +1,24 @@
+{% extends 'layouts/application.html' %}
+<!-- {% block head %}
+  <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+  <script src="https://www.WebRTC-Experiment.com/RecordRTC.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.3.0/socket.io.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io-stream/0.9.1/socket.io-stream.js"></script>
+  <script src="{{ url_for('static', filename='javascript/mentalcounting/index.js') }}"></script>
+{% endblock head %} -->
+
+{% block content %}
+  <h2>Mental counting</h2>
+  <!-- <audio controls>
+    <source src="{{ url_for('mentalcounting.audio') }}" type="audio/x-wav;codec=pcm">
+    Your browser does not support the audio element.
+  </audio> -->
+  <div>
+    <button id="start-recording" disabled>Start Recording</button>
+    <button id="stop-recording" disabled>Stop Recording</button>
+  </div>
+  <script type="text/javascript">
+    const audioStream = new AudioStream()
+    audioStream.initialize()
+  </script>
+{% endblock content %}
