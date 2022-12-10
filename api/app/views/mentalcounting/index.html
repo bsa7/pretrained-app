@@ -1,21 +1,20 @@
 {% extends 'layouts/application.html' %}
-<!-- {% block head %}
-  <meta http-equiv="content-type" content="text/html; charset=utf-8" />
-  <script src="https://www.WebRTC-Experiment.com/RecordRTC.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.3.0/socket.io.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io-stream/0.9.1/socket.io-stream.js"></script>
-  <script src="{{ url_for('static', filename='javascript/mentalcounting/index.js') }}"></script>
-{% endblock head %} -->
+{% block head %}
+<link rel="stylesheet" href="{{ url_for('static', filename='stylesheets/mentalcounting/index.css') }}">
+<script src="{{ url_for('static', filename='javascript/mentalcounting/audio_stream_analyzer.js') }}" ></script>
+<script src="{{ url_for('static', filename='javascript/mentalcounting/audio_stream_visualizer.js') }}" ></script>
+<script src="{{ url_for('static', filename='javascript/mentalcounting/audio_stream.js') }}" ></script>
+{% endblock head %}
 
 {% block content %}
   <h2>Mental counting</h2>
-  <!-- <audio controls>
-    <source src="{{ url_for('mentalcounting.audio') }}" type="audio/x-wav;codec=pcm">
-    Your browser does not support the audio element.
-  </audio> -->
   <div>
     <button id="start-recording">Start Recording</button>
     <div id="sound-clip"></div>
+  </div>
+  <div class="full-width">
+    <div class="noise-status"></div>
+    <canvas class="visualizer" height="360px" width="1000px"></canvas>
   </div>
   <script type="text/javascript">
     const startRecordingButton = document.querySelector('#start-recording')

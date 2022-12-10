@@ -6,14 +6,26 @@ class AudioStream {
     this.stream
     this.recording = false
     this.triggerButton = triggerButton
+    this.audioStreamVisualizer
+    this.audioStreamAnalyzer
     this.initialize()
   }
 
   async initialize() {
     await this.queryAccessToMicrophone()
-    console.log('initialize#12', { 'this.stream': this.stream })
+    // console.log('initialize#12', { 'this.stream': this.stream })
     this.initializeMediaRecorder(this.stream)
+    this.initializeAudioStreamVisualizer(this.stream)
+    this.initializeAudioStreamAnalyzer(this.stream)
     this.triggerButton.addEventListener('click', this.trigger.bind(this))
+  }
+
+  initializeAudioStreamVisualizer(stream) {
+    this.audioStreamVisualizer = new AudioStreamVisualizer(stream)
+  }
+
+  initializeAudioStreamAnalyzer(stream) {
+    this.audioStreamAnalyzer = new AudioStreamAnalyzer(stream)
   }
 
   async queryAccessToMicrophone() {
@@ -40,7 +52,12 @@ class AudioStream {
     this.mediaRecorder.onstop = this.mediaRecorderOnStop.bind(this)
   }
 
+  initializeMediaStream(stream) {
+
+  }
+
   startRecording() {
+    this.soundClipElement.replaceChildren()
     this.recording = true
     this.triggerButton.innerText = 'Stop Recording'
     this.mediaRecorder.start()
@@ -61,20 +78,24 @@ class AudioStream {
   }
 
   mediaRecorderOnDataAvailable(event) {
-    console.log('ondataavailable#34', { 'event.data': event.data })
+    // console.log('ondataavailable#34', { 'event.data': event.data })
     this.chunks.push(event.data);
   }
 
   mediaRecorderOnStop(event) {
-    console.log('mediaRecorderOnStop#45', { event })
+    // console.log('mediaRecorderOnStop#45', { event })
     // A "blob" combines all the audio chunks into a single entity
     const audio = new Audio();
     audio.setAttribute("controls", "");
-    document.querySelector('#sound-clip').appendChild(audio)
+    this.soundClipElement.appendChild(audio)
 
     // Combine the audio chunks into a blob, then point the empty audio clip to that blob.
     const blob = new Blob(this.chunks, {"type": "audio/ogg; codecs=opus"});
     audio.src = window.URL.createObjectURL(blob);
     this.chunks = []; // clear buffer
+  }
+
+  get soundClipElement() {
+    return document.querySelector('#sound-clip')
   }
 }
