@@ -17,6 +17,8 @@ class ApplicationController:
 
   def _params(self) -> dict:
     ''' Returns rest parameters '''
+    logging.info(f'{dir(request)=}')
+    logging.info(f'{request.data=}')
     return dict(request.args)
 
   def _files(self) -> dict:

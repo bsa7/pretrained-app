@@ -4,7 +4,7 @@ from app.lib.router import get, post
 
 # API endpoints
 post('/api/welcome/start', 'welcome#start')
-get('/api/mental_counting/audio', 'mentalcounting#audio')
+post('/api/mental_counting/recognize_speech', 'mentalcounting#recognize_speech')
 
 # HTTP pages
 get('/welcome', 'welcome#index')

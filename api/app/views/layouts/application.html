@@ -3,6 +3,7 @@
   <head>
     <title>{% block title %}{% endblock %} - Flaskr</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='stylesheets/application.css') }}">
+    <script src="{{ url_for('static', filename='javascript/utils/api.js') }}" ></script>
     {% block head %}{% endblock %}
   </head>
   <body>

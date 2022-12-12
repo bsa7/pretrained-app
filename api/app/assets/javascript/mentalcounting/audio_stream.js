@@ -8,12 +8,12 @@ class AudioStream {
     this.triggerButton = triggerButton
     this.audioStreamVisualizer
     this.audioStreamAnalyzer
+    this.api = new Api()
     this.initialize()
   }
 
   async initialize() {
     await this.queryAccessToMicrophone()
-    // console.log('initialize#12', { 'this.stream': this.stream })
     this.initializeMediaRecorder(this.stream)
     this.initializeAudioStreamVisualizer(this.stream)
     this.initializeAudioStreamAnalyzer(this.stream)
@@ -25,7 +25,17 @@ class AudioStream {
   }
 
   initializeAudioStreamAnalyzer(stream) {
-    this.audioStreamAnalyzer = new AudioStreamAnalyzer(stream)
+    this.audioStreamAnalyzer = new AudioStreamAnalyzer(stream, this.onSpeechStart.bind(this), this.onSpeechEnd.bind(this))
+  }
+
+  onSpeechStart() {
+    console.log('speech start')
+    this.mediaRecorder.start()
+  }
+
+  onSpeechEnd() {
+    console.log('speech end')
+    this.mediaRecorder.stop()
   }
 
   async queryAccessToMicrophone() {
@@ -82,16 +92,19 @@ class AudioStream {
     this.chunks.push(event.data);
   }
 
-  mediaRecorderOnStop(event) {
+  async mediaRecorderOnStop(event) {
     // console.log('mediaRecorderOnStop#45', { event })
     // A "blob" combines all the audio chunks into a single entity
-    const audio = new Audio();
-    audio.setAttribute("controls", "");
-    this.soundClipElement.appendChild(audio)
-
+    const blob = new Blob(this.chunks, { type: 'audio/ogg; codecs=opus' });
+    // const audioJson = this.chunks
+    console.log('mediaRecorderOnStop#98', { 'this.chunks': this.chunks, blob })
+    const response = await this.api.postJson({ path: 'mental_counting/recognize_speech', data: { audio: blob } })
+    console.log('mediaRecorderOnStop#98', { response })
+    // const audio = new Audio();
+    // audio.setAttribute("controls", "");
+    // this.soundClipElement.appendChild(audio)
     // Combine the audio chunks into a blob, then point the empty audio clip to that blob.
-    const blob = new Blob(this.chunks, {"type": "audio/ogg; codecs=opus"});
-    audio.src = window.URL.createObjectURL(blob);
+    // audio.src = window.URL.createObjectURL(blob);
     this.chunks = []; // clear buffer
   }
 

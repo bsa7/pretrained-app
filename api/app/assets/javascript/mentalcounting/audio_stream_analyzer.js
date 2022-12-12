@@ -1,5 +1,5 @@
 class AudioStreamAnalyzer {
-  constructor(stream) {
+  constructor(stream, onSpeechStart, onSpeechEnd) {
     console.log('audioStreamAnalyzer#3')
     this.statusBlock = document.querySelector('.noise-status')
     this.stream = stream
@@ -7,9 +7,11 @@ class AudioStreamAnalyzer {
     this.analyser
     this.maxSilenceLevel = 133     //
     this.minSilenceLevel = 121     //
-    this.maxSilenceInterval = 1000 // milliseconds
+    this.maxSilenceInterval = 500 // milliseconds
     this.speechMode = false // Trigger: silence: false or speech: true
     this.setSilenceModeTimeoutId
+    this.onSpeechStart = onSpeechStart
+    this.onSpeechEnd = onSpeechEnd
     this.analyze()
   }
 
@@ -73,6 +75,12 @@ class AudioStreamAnalyzer {
     if (this.speechMode === newSpeechMode) return
 
     this.speechMode = newSpeechMode
+    if (this.speechMode === true) {
+      this.onSpeechStart()
+    } else {
+      this.onSpeechEnd()
+    }
+
     this.visualizeSoundMode()
   }
 
