@@ -14,7 +14,7 @@ class ObjectImageColorizer:
     watermarked = "2022-11-29" #@param {type:"date"}
 
     # PP-27 Расскомментируй эти строки после того, как твоя страница после нажатия на кнопку перейдёт на
-    # image_path = visualize.colorizer.plot_transformed_image_from_url(url=image_url, render_factor=render_factor, compare=True, watermarked=watermarked)
-    # result_path = visualise.show_image_in_notebook(image_path)
-    # return result_path
+    #image_path = visualize.colorizer.plot_transformed_image_from_url(url=image_url, render_factor=render_factor, compare=True, watermarked=watermarked)
+    #result_path = visualise.show_image_in_notebook(image_path)
+    #return result_path
     return image_path
