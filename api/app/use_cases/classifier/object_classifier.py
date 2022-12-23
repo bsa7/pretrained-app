@@ -16,5 +16,5 @@ class ObjectClassifier:
     outputs = self.model(**inputs)
     logits = outputs.logits
     predicted_class_idx = logits.argmax(-1).item()
-    result = "На картинке изображенно:", self.model.config.id2label[predicted_class_idx]
+    result = f"на картинке изображено {self.model.config.id2label[predicted_class_idx]}"
     return result

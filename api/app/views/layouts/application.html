@@ -1,6 +1,7 @@
 <!doctype html>
 <title>{% block title %}{% endblock %} - Flaskr</title>
 <link rel="stylesheet" href="{{ url_for('static', filename='stylesheets/application.css') }}">
+{% block head %}{% endblock %}
 <nav>
   <h1>Приложение с предварительно обученными моделями</h1>
 </nav>
