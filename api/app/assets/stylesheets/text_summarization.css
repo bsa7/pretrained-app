@@ -1,0 +1,13 @@
+.summarization-result {
+  display: block;
+  padding: 40px;
+}
+
+.summarization-result--header {
+  display: block;
+  font-size: 16px;
+}
+
+.summarization-result--content {
+  display: block;
+}
