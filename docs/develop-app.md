@@ -134,6 +134,19 @@ If all going fine, you would see output in console, like that:
 ```
 > Note: you could omit first level folder in path, relative to project's root. In above example, the file, which placed in `./api/test/controllers/welcome_controller_test.py` would become as `./test/controllers/welcome_controller_test.py`
 
+### Using tags for run test explicitly
+When you describe your ward test, you can use tags:
+```python
+@test('response with status 200 for GET query', tags=['request', 'text_summarization', 'current'])
+def _(client = client, resource = each('summarization')):
+  response = client.get(url_for(f'{resource}.index'))
+  assert response.status_code == 200
+```
+
+So, if you want to run one particular test, you can specify its tag when running:
+```bash
+./script/run_tests.sh --tags=current
+```
 
 ## Useful links
 ### API libraries
