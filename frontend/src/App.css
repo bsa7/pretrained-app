@@ -1,3 +1,5 @@
+/** @format */
+
 @import url("https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;500&display=swap");
 
 * {
@@ -16,7 +18,7 @@ body {
   flex-direction: column;
 }
 
-/* commun style */
+/* common style */
 .main {
   display: flex;
 }
@@ -173,4 +175,41 @@ body {
 .about * {
   margin-bottom: 8px;
 }
-/* ------------------------------------- */
+
+/* --------------Text to speech --------------- */
+.text-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.top-tools {
+  width: 40rem;
+  display: flex;
+  justify-content: space-between;
+}
+.top-tools div {
+  width: 100rem;
+  background-color: #7eb5f5;
+  text-align: center;
+  color: white;
+  border-bottom: 1px solid rgb(243, 185, 185);
+  border-top: 1px solid rgb(243, 185, 185);
+  border-right: 1px solid rgb(243, 185, 185);
+}
+.top-tools:first-child {
+  border-left: 1px solid rgb(243, 185, 185);
+}
+.top-tools div p {
+  padding: 5px;
+  cursor: pointer;
+}
+.text-area textarea {
+  width: 40rem;
+  resize: none;
+  border: none;
+  border-radius: 0 0 1rem 1rem;
+  background-color: #f1dabf;
+  padding: 10px;
+  outline: none;
+}

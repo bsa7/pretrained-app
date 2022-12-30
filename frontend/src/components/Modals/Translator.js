@@ -40,7 +40,7 @@ const Translator = () => {
         name='originalText'
         cols='30'
         rows='10'
-        placeholder='Enter you text here....'
+        placeholder='Enter your text here....'
         value={userText}
         onChange={handleChange}
         disabled={origin === "" || to === ""}

@@ -1,3 +1,5 @@
+/** @format */
+
 import axios from "axios";
 import { useReducer } from "react";
 import modalContext from "./modalContext";
@@ -40,6 +42,21 @@ const ModalState = (props) => {
     dispatch({ type: UPDATE_LANGUAGES, payload: data });
   };
 
+  const detectObj = async (image) => {
+    const data = image;
+
+    const response = await axios.post(
+      "https://api-inference.huggingface.co/models/facebook/detr-resnet-50",
+      data,
+      {
+        headers: {
+          Authorization: `Bearer ${process.env.REACT_APP_API_TOKEN}`,
+        },
+      }
+    );
+    console.log(JSON.stringify(response));
+  };
+
   return (
     <modalContext.Provider
       value={{
@@ -47,6 +64,7 @@ const ModalState = (props) => {
         languages: state.languages,
         getTranslation,
         updateLanguages,
+        detectObj,
       }}
     >
       {props.children}

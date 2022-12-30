@@ -1,11 +1,21 @@
-import React, { useRef, useState } from "react";
+/** @format */
+
+import React, { useRef, useState, useEffect, useContext } from "react";
+import ModalContext from "../../context/Modals/modalContext";
 
 const Objectsdetector = () => {
   const [url, setUrl] = useState("");
   const upBtn = useRef(null);
-
+  const modalContext = useContext(ModalContext);
+  const { detectObj } = modalContext;
+  useEffect(() => {
+    if (url) {
+      detectObj(url);
+    }
+  }, [url]);
   const handleChange = (event) => {
     setUrl(event.target.value);
+    console.log(event.target.value, "kjj");
   };
   const handleClick = (event) => {
     upBtn.current.click();
@@ -33,6 +43,7 @@ const Objectsdetector = () => {
         id=''
         hidden
         ref={upBtn}
+        onChange={handleChange}
       />
     </div>
   );
