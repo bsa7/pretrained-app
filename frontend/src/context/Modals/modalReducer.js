@@ -1,4 +1,11 @@
-import { GET_TRANSLATION, UPDATE_LANGUAGES, RESET_FIELDS } from "../types";
+/** @format */
+
+import {
+  GET_TRANSLATION,
+  UPDATE_LANGUAGES,
+  RESET_FIELDS,
+  SET_AUDIO,
+} from "../types";
 
 const modalReducer = (state, action) => {
   switch (action.type) {
@@ -12,6 +19,11 @@ const modalReducer = (state, action) => {
       return {
         ...state,
         languages: action.payload,
+      };
+    case SET_AUDIO:
+      return {
+        ...state,
+        audio: action.payload,
       };
     case RESET_FIELDS:
       return {

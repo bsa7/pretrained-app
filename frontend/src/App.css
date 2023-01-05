@@ -178,6 +178,7 @@ body {
 
 /* --------------Text to speech --------------- */
 .text-container {
+  position: relative;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -202,6 +203,21 @@ body {
 }
 .top-tools div p {
   padding: 5px;
+  cursor: pointer;
+}
+.play-btn {
+  position: absolute;
+  right: 1rem;
+  bottom: 1rem;
+  font-size: 1.5rem;
+  transition: all 1s;
+}
+.play-btn:hover {
+  color: rgb(243, 185, 185);
+  rotate: -180deg;
+}
+.text-area {
+  position: relative;
   cursor: pointer;
 }
 .text-area textarea {

@@ -4,11 +4,17 @@ import axios from "axios";
 import { useReducer } from "react";
 import modalContext from "./modalContext";
 import modalReducer from "./modalReducer";
-import { GET_TRANSLATION, UPDATE_LANGUAGES, RESET_FIELDS } from "../types";
+import {
+  GET_TRANSLATION,
+  UPDATE_LANGUAGES,
+  SET_AUDIO,
+  RESET_FIELDS,
+} from "../types";
 const ModalState = (props) => {
   const initialState = {
     userText: "",
     translatedText: "",
+    audio: null,
     languages: [],
   };
 
@@ -43,28 +49,75 @@ const ModalState = (props) => {
   };
 
   const detectObj = async (image) => {
-    const data = image;
+    const data = require(image);
+    console.log(image);
 
-    const response = await axios.post(
-      "https://api-inference.huggingface.co/models/facebook/detr-resnet-50",
-      data,
-      {
-        headers: {
-          Authorization: `Bearer ${process.env.REACT_APP_API_TOKEN}`,
-        },
-      }
-    );
-    console.log(JSON.stringify(response));
+    // const response = await axios.post(
+    //   "https://api-inference.huggingface.co/models/facebook/detr-resnet-50",
+    //   data,
+    //   {
+    //     headers: {
+    //       Authorization: `Bearer ${process.env.REACT_APP_API_TOKEN}`,
+    //     },
+    //   }
+    // );
+    // console.log(JSON.stringify(response));
   };
 
+  const readText = async (text) => {
+    try {
+      const response = await fetch(
+        "https://api-inference.huggingface.co/models/Voicemod/fastspeech2-en-male1",
+        {
+          headers: {
+            Authorization: `Bearer ${process.env.REACT_APP_API_TOKEN}`,
+          },
+          method: "POST",
+          body: JSON.stringify(text),
+        }
+      );
+
+      return response;
+    } catch (error) {
+      console.log(error.message);
+    }
+  };
+  const readTextRapidApi = async (lang, text) => {
+    const encodedParams = new URLSearchParams();
+    encodedParams.append("voice_code", `${lang}`);
+    encodedParams.append("text", `${text}`);
+    encodedParams.append("speed", "1.00");
+    encodedParams.append("pitch", "1.00");
+    encodedParams.append("output_type", "audio_url");
+
+    const options = {
+      method: "POST",
+
+      headers: {
+        "content-type": "application/x-www-form-urlencoded",
+        "X-RapidAPI-Key": "473c8d10c4msh4f8a18494934a8fp15004bjsnd0b3031f5df5",
+        "X-RapidAPI-Host": "cloudlabs-text-to-speech.p.rapidapi.com",
+      },
+      body: encodedParams,
+    };
+
+    const res = fetch(
+      "https://cloudlabs-text-to-speech.p.rapidapi.com/synthesize",
+      options
+    );
+    return res;
+  };
   return (
     <modalContext.Provider
       value={{
         translatedText: state.translatedText,
         languages: state.languages,
+        audio: state.audio,
         getTranslation,
         updateLanguages,
         detectObj,
+        readText,
+        readTextRapidApi,
       }}
     >
       {props.children}
