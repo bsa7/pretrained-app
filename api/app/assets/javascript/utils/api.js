@@ -1,6 +1,8 @@
 class Api {
   async postJson({ data, headers, path }) {
-    const url = `https://dev.pretrained-app.ru/api/${path}`
+    const API_DOMAIN = 'https://staging-pretrained-app.jsdev.cyou'
+    const API_HOST = '/api'
+    const url = `${API_HOST}${path}`
     const body = JSON.stringify(data)
     console.log('postJson#5', { data })
 

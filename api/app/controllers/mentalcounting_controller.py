@@ -22,7 +22,8 @@ class MentalcountingController(ApplicationController):
     mime_type = self._params().get('mimeType')
     logging.info(f'audio_data: {audio_data}, mime_type: {mime_type}')
     text = self.recognizer.recognize(audio_data, mime_type = mime_type)
-    result = { 'status': 'success', 'text': text }
+    status = 'success' if text is not None else 'failure'
+    result = { 'status': status, 'text': text }
     logging.info('--------------------------------- recognize_speech#19 -------------------------')
     logging.info(f'result: {result=}')
     return result

@@ -34,12 +34,12 @@ class AudioStream {
   }
 
   onSpeechStart() {
-    console.log('speech start')
+    // console.log('speech start')
     this.mediaRecorder.start()
   }
 
   onSpeechEnd() {
-    console.log('speech end')
+    // console.log('speech end')
     this.mediaRecorder.stop()
   }
 
@@ -93,7 +93,7 @@ class AudioStream {
   }
 
   mediaRecorderOnDataAvailable(event) {
-    console.log('ondataavailable#34', { 'event.data': event.data })
+    // console.log('ondataavailable#34', { 'event.data': event.data })
     this.chunks.push(event.data);
   }
 
@@ -122,9 +122,9 @@ class AudioStream {
     const response = await this.api.postJson({
       data: { audio: base64Audio, mimeType: this.mimeType, text: 'cong' },
       headers: this.audioHeaders,
-      path: 'mental_counting/recognize_speech',
+      path: '/mental_counting/recognize_speech',
     })
-    console.log('mediaRecorderOnStop#98', { response })
+    // console.log('mediaRecorderOnStop#98', { response })
     if (response.status == 'success') {
       document.querySelector('#recognition-result').innerText = response.text
     }

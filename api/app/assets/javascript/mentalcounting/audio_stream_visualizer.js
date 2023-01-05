@@ -1,12 +1,19 @@
 class AudioStreamVisualizer {
   constructor(stream) {
     this.stream = stream
-    this.canvas = document.querySelector('.visualizer')
-    this.canvasCtx = this.canvas.getContext('2d')
-    this.canvasCtx.fillRect(0, 0, this.canvas.width, this.canvas.height)
+    this.initializeVisualizationArea()
     this.audioCtx
     this.analyser
     this.visualize()
+  }
+
+  initializeVisualizationArea = () => {
+    const canvasContainer = document.querySelector('.visualizer--container')
+    this.canvas = document.querySelector('.visualizer')
+    this.canvasCtx = this.canvas.getContext('2d')
+    this.canvasCtx.width = canvasContainer.offsetWidth
+    this.canvasCtx.height = canvasContainer.offsetHeight
+    this.canvasCtx.fillRect(0, 0, this.canvas.width, this.canvas.height)
   }
 
   visualize = () => {
@@ -28,6 +35,7 @@ class AudioStreamVisualizer {
   draw = () => {
     const WIDTH = this.canvas.width
     const HEIGHT = this.canvas.height
+    const k = 0.5
 
     requestAnimationFrame(this.draw)
 
@@ -42,7 +50,7 @@ class AudioStreamVisualizer {
     this.canvasCtx.beginPath()
 
     for(let i = 0; i < this.bufferLength; i++) {
-      let v = this.dataArray[i] / 128.0 * HEIGHT / 2
+      let v = this.dataArray[i] / 128.0 * HEIGHT / 2 * k
       let angle = (i / this.bufferLength) * 2 * Math.PI
       let x = WIDTH / 2 + v * Math.cos(angle)
       let y = HEIGHT / 2 + v * Math.sin(angle)

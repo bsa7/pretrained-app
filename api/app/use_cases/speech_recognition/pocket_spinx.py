@@ -1,16 +1,17 @@
 ''' В этом файле находится предварительно обученная модель распознавания устной речи '''
+from pathlib import Path
 from pydub import AudioSegment
+from datetime import datetime
 import base64
 import io
 import logging
-import pygame
+import os
 import speech_recognition as sr
-
 
 class PocketSphinx:
   ''' Класс выполняет распознавание речи в текст '''
   def __init__(self):
-    pygame.mixer.init()
+    self.root_path = Path(__file__).parent.parent.parent.parent.resolve()
     self.recognizer = sr.Recognizer()
 
   def recognize(self, audio_data, mime_type = 'audio/webm;codecs=opus'):
@@ -18,19 +19,26 @@ class PocketSphinx:
     audio_data = audio_data.replace(f'data:{mime_type};base64,', '')
     print(f'{audio_data=}')
     decoded_audio = base64.b64decode(audio_data)
-    temp_file_name = '/home/slon/tmp/_test.webm'
+    temp_file_name = self.temp_file_name
     with open(temp_file_name, 'wb') as f:
       f.write(decoded_audio)
 
     wav_file_name = self.webm2wav(temp_file_name)
 
     audio_file = sr.AudioFile(wav_file_name)
-    with audio_file as audio_source:
-      sr_audio_file = self.recognizer.record(audio_source)
+    with audio_file:
+      sr_audio_file = self.recognizer.record(audio_file)
 
-    # result = self.recognizer.recognize_sphinx(sr_audio_file, language = 'en-US')
-    result = self.recognizer.recognize_google(sr_audio_file, language = 'ru-RU')
-    logging.info(f'{result=}')
+    try:
+      result = self.recognizer.recognize_google(sr_audio_file, language = 'ru-RU')
+      logging.info(f'Recognition result: {result=}')
+    except sr.UnknownValueError:
+      logging.info(f'Recognition failed')
+      result = None
+    finally:
+      os.remove(temp_file_name)
+      os.remove(wav_file_name)
+
     return result
 
   def webm2wav(self, file_name):
@@ -38,3 +46,8 @@ class PocketSphinx:
     x = AudioSegment.from_file(file_name)
     x.export(wav_file_name, format = 'wav')
     return wav_file_name
+
+  @property
+  def temp_file_name(self):
+    timestamp = datetime.timestamp(datetime.now())
+    return f'{self.root_path}/tmp/_test_#{timestamp}.webm'

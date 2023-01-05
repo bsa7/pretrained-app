@@ -1,5 +1,8 @@
 FROM nikolaik/python-nodejs:python3.10-nodejs18
 
+RUN apt-get update
+RUN apt-get install ffmpeg libasound-dev libportaudio2 libportaudiocpp0 portaudio19-dev -y
+
 USER pn
 
 ENV LANG=C.UTF-8
@@ -14,6 +17,7 @@ ENV PATH="${PATH}:/home/pn/.local/bin"
 ENV API_ENV=production
 WORKDIR $APP_PATH
 EXPOSE 5000
+RUN mkdir -p ./api/tmp
 COPY --chown=pn:pn ./api/ ./
 RUN pip install setuptools==65.5.0 && \
     pip install --upgrade pip && \
