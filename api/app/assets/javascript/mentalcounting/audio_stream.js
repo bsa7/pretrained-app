@@ -125,6 +125,9 @@ class AudioStream {
       path: 'mental_counting/recognize_speech',
     })
     console.log('mediaRecorderOnStop#98', { response })
+    if (response.status == 'success') {
+      document.querySelector('#recognition-result').innerText = response.text
+    }
   }
 
   get soundClipElement() {

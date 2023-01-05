@@ -3,3 +3,8 @@
   padding: 20px;
   font-size: 14px;
 }
+
+.recognition-result {
+  font-size: 30px;
+  color: crimson;
+}

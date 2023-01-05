@@ -28,7 +28,8 @@ class PocketSphinx:
     with audio_file as audio_source:
       sr_audio_file = self.recognizer.record(audio_source)
 
-    result = self.recognizer.recognize_sphinx(sr_audio_file)
+    # result = self.recognizer.recognize_sphinx(sr_audio_file, language = 'en-US')
+    result = self.recognizer.recognize_google(sr_audio_file, language = 'ru-RU')
     logging.info(f'{result=}')
     return result
 
