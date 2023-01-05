@@ -9,6 +9,7 @@ class AudioStream {
     this.audioStreamVisualizer
     this.audioStreamAnalyzer
     this.api = new Api()
+    this.mimeType = 'audio/webm;codecs=opus'
     this.audioHeaders = {
       'Content-Type': 'application/octet-stream'
     }
@@ -59,7 +60,7 @@ class AudioStream {
 
   initializeMediaRecorder(stream) {
     // Instantiate the media recorder.
-    this.mediaRecorder = new MediaRecorder(stream);
+    this.mediaRecorder = new MediaRecorder(stream, { mimeType: this.mimeType });
     // Create a buffer to store the incoming data.
     this.chunks = []
     this.mediaRecorder.ondataavailable = this.mediaRecorderOnDataAvailable.bind(this)
@@ -97,20 +98,19 @@ class AudioStream {
   }
 
   async mediaRecorderOnStop(event) {
-    // console.log('mediaRecorderOnStop#45', { event })
-    // A "blob" combines all the audio chunks into a single entity
-    // const blob = new Blob(this.chunks, { type: 'audio/ogg; codecs=opus' });
+    // Этот блок создаёт аудио элемент с возможностью скачивания
+    // const blob = new Blob(this.chunks, { type: this.mimeType });
     // const audio = new Audio();
     // audio.setAttribute("controls", "");
     // this.soundClipElement.appendChild(audio)
-    // Combine the audio chunks into a blob, then point the empty audio clip to that blob.
     // audio.src = window.URL.createObjectURL(blob);
 
-    // const audioJson = this.chunks
-    const blob = new Blob(this.chunks, { type: 'audio/ogg; codecs=opus' })
+    // Этот блок отправляет аудио данные в API
+    const audioJson = this.chunks
+    const blob = new Blob(this.chunks, { type: this.mimeType })
     const reader = new FileReader()
-    reader.readAsBinaryString(blob)
-    reader.onloadend = () => {
+    reader.readAsDataURL(blob)
+    reader.onload = () => {
       const base64String = reader.result
       console.log('mediaRecorderOnStop#98', { base64String })
       this.sendAudio(base64String)
@@ -120,7 +120,7 @@ class AudioStream {
 
   async sendAudio(base64Audio) {
     const response = await this.api.postJson({
-      data: { audio: base64Audio, text: 'cong' },
+      data: { audio: base64Audio, mimeType: this.mimeType, text: 'cong' },
       headers: this.audioHeaders,
       path: 'mental_counting/recognize_speech',
     })

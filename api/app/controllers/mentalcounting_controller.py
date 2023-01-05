@@ -19,8 +19,9 @@ class MentalcountingController(ApplicationController):
   def recognize_speech(self):
     ''' Receives audio blob from client side, recognize and response with text '''
     audio_data = self._params().get('audio')
-    logging.info(f'audio_data: {audio_data=}')
-    text = self.recognizer.recognize(audio_data)
+    mime_type = self._params().get('mimeType')
+    logging.info(f'audio_data: {audio_data}, mime_type: {mime_type}')
+    text = self.recognizer.recognize(audio_data, mime_type = mime_type)
     result = { 'status': 'success', 'text': text }
     logging.info('--------------------------------- recognize_speech#19 -------------------------')
     logging.info(f'result: {result=}')
