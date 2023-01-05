@@ -17,9 +17,7 @@ class ApplicationController:
 
   def _params(self) -> dict:
     ''' Returns rest parameters '''
-    logging.info(f'{dir(request)=}')
-    logging.info(f'{request.data=}')
-    return dict(request.args)
+    return request.get_json(force = True)
 
   def _files(self) -> dict:
     ''' Returns files, attached in post request '''

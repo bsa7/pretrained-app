@@ -9,6 +9,10 @@ class AudioStream {
     this.audioStreamVisualizer
     this.audioStreamAnalyzer
     this.api = new Api()
+    this.audioHeaders = {
+      'Content-Type': 'application/octet-stream'
+    }
+
     this.initialize()
   }
 
@@ -88,24 +92,39 @@ class AudioStream {
   }
 
   mediaRecorderOnDataAvailable(event) {
-    // console.log('ondataavailable#34', { 'event.data': event.data })
+    console.log('ondataavailable#34', { 'event.data': event.data })
     this.chunks.push(event.data);
   }
 
   async mediaRecorderOnStop(event) {
     // console.log('mediaRecorderOnStop#45', { event })
     // A "blob" combines all the audio chunks into a single entity
-    const blob = new Blob(this.chunks, { type: 'audio/ogg; codecs=opus' });
-    // const audioJson = this.chunks
-    console.log('mediaRecorderOnStop#98', { 'this.chunks': this.chunks, blob })
-    const response = await this.api.postJson({ path: 'mental_counting/recognize_speech', data: { audio: blob } })
-    console.log('mediaRecorderOnStop#98', { response })
+    // const blob = new Blob(this.chunks, { type: 'audio/ogg; codecs=opus' });
     // const audio = new Audio();
     // audio.setAttribute("controls", "");
     // this.soundClipElement.appendChild(audio)
     // Combine the audio chunks into a blob, then point the empty audio clip to that blob.
     // audio.src = window.URL.createObjectURL(blob);
-    this.chunks = []; // clear buffer
+
+    // const audioJson = this.chunks
+    const blob = new Blob(this.chunks, { type: 'audio/ogg; codecs=opus' })
+    const reader = new FileReader()
+    reader.readAsBinaryString(blob)
+    reader.onloadend = () => {
+      const base64String = reader.result
+      console.log('mediaRecorderOnStop#98', { base64String })
+      this.sendAudio(base64String)
+      this.chunks = []; // clear buffer
+    }
+  }
+
+  async sendAudio(base64Audio) {
+    const response = await this.api.postJson({
+      data: { audio: base64Audio, text: 'cong' },
+      headers: this.audioHeaders,
+      path: 'mental_counting/recognize_speech',
+    })
+    console.log('mediaRecorderOnStop#98', { response })
   }
 
   get soundClipElement() {
