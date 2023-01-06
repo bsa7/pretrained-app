@@ -1,13 +1,14 @@
 class AudioStreamAnalyzer {
+  // Этот класс контролирует аудио поток и когда обнаруживает паузу заданной длины,
+  // Инициализирует выполнение onSpeechEnd, передавая ему буфер с аудио данными
   constructor(stream, onSpeechStart, onSpeechEnd) {
-    console.log('audioStreamAnalyzer#3')
     this.statusBlock = document.querySelector('.noise-status')
     this.stream = stream
     this.audioCtx
     this.analyser
     this.maxSilenceLevel = 133     //
     this.minSilenceLevel = 121     //
-    this.maxSilenceInterval = 500 // milliseconds
+    this.maxSilenceInterval = 1000 // milliseconds
     this.speechMode = false // Trigger: silence: false or speech: true
     this.setSilenceModeTimeoutId
     this.onSpeechStart = onSpeechStart

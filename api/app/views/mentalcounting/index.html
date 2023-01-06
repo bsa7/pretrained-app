@@ -4,10 +4,12 @@
 <script src="{{ url_for('static', filename='javascript/mentalcounting/audio_stream_analyzer.js') }}" ></script>
 <script src="{{ url_for('static', filename='javascript/mentalcounting/audio_stream_visualizer.js') }}" ></script>
 <script src="{{ url_for('static', filename='javascript/mentalcounting/audio_stream.js') }}" ></script>
+<script src="{{ url_for('static', filename='javascript/mentalcounting/info_block.js') }}" ></script>
 {% endblock head %}
 
 {% block content %}
-  <h2>Mental counting</h2>
+  <h2>Говорите.</h2>
+  <p>Паузы длиннее секунды разделяют фразы.</p>
   <div>
     <div id="recognition-result" class="recognition-result"></div>
     <div class="noise-status"></div>
@@ -16,7 +18,6 @@
     <canvas class="visualizer"></canvas>
   </div>
   <script type="text/javascript">
-    const startRecordingButton = document.querySelector('#start-recording')
-    const audioStream = new AudioStream(startRecordingButton)
+    const audioStream = new AudioStream()
   </script>
 {% endblock content %}

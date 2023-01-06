@@ -17,7 +17,6 @@ class PocketSphinx:
   def recognize(self, audio_data, mime_type = 'audio/webm;codecs=opus'):
     ''' На входе принимает бинарные аудиоданные '''
     audio_data = audio_data.replace(f'data:{mime_type};base64,', '')
-    print(f'{audio_data=}')
     decoded_audio = base64.b64decode(audio_data)
     temp_file_name = self.temp_file_name
     with open(temp_file_name, 'wb') as f:
@@ -29,12 +28,14 @@ class PocketSphinx:
     with audio_file:
       sr_audio_file = self.recognizer.record(audio_file)
 
+    result = None
     try:
       result = self.recognizer.recognize_google(sr_audio_file, language = 'ru-RU')
       logging.info(f'Recognition result: {result=}')
     except sr.UnknownValueError:
       logging.info(f'Recognition failed')
-      result = None
+    except BaseException:
+      logging.exception('Произошла ошибка')
     finally:
       os.remove(temp_file_name)
       os.remove(wav_file_name)
@@ -42,6 +43,7 @@ class PocketSphinx:
     return result
 
   def webm2wav(self, file_name):
+    '''Преобразует имя файла webm в wav'''
     wav_file_name = file_name.replace('.webm', '.wav')
     x = AudioSegment.from_file(file_name)
     x.export(wav_file_name, format = 'wav')
@@ -49,5 +51,8 @@ class PocketSphinx:
 
   @property
   def temp_file_name(self):
+    '''Генерирует имя временного файла для записи звука'''
     timestamp = datetime.timestamp(datetime.now())
-    return f'{self.root_path}/tmp/_test_#{timestamp}.webm'
+    file_name = f'{self.root_path}/tmp/_test_#{timestamp}.webm'
+    logging.info(f'Создан временный файл {file_name}')
+    return file_name

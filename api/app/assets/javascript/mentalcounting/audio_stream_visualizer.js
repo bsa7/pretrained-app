@@ -1,4 +1,6 @@
 class AudioStreamVisualizer {
+  // Этот класс выполняет визуализацию звукового потока, получаемого от MediaRecorder,
+  // и используя канвас, рисует звуковой поток, заворачивая его в круг
   constructor(stream) {
     this.stream = stream
     this.initializeVisualizationArea()
