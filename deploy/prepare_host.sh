@@ -2,17 +2,24 @@
 
 # sudo update-alternatives --config editor
 
-# login as sudo
+# login as sudo user
 sudo apt-get install -y docker
 sudo apt-get install -y docker-compose
 sudo adduser --disabled-password deploy
 sudo usermod -aG docker deploy
 sudo mcedit /etc/hosts
-# Add to ens of file:
-# pretrained-app.jsdev.cyou 0.0.0.0
-# pretrained-app-frontend.jsdev.cyou 0.0.0.0
+
+# Add to end of file:
+# staging-pretrained-app.jsdev.cyou 0.0.0.0
+# staging-pretrained-app-frontend.jsdev.cyou 0.0.0.0
 
 # login as deploy
+sudo su deploy
+mkdir -p ~/.ssh
+mcedit ~/.ssh/authorized_keys
+# Добавить публичную часть ssh ключей допущенных к деплою разработчиков, сохранить
+
+
 mkdir -p /home/deploy/pretrained-app
 cd /home/deploy/pretrained-app
 
