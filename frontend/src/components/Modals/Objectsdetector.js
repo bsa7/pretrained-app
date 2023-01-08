@@ -2,23 +2,42 @@
 
 import React, { useRef, useState, useEffect, useContext } from "react";
 import ModalContext from "../../context/Modals/modalContext";
+import Canvas from "../Canvas";
 
 const Objectsdetector = () => {
   const [url, setUrl] = useState("");
   const upBtn = useRef(null);
   const modalContext = useContext(ModalContext);
-  const { detectObj } = modalContext;
+  const { detectObj, detectObLoc, resetObj } = modalContext;
   useEffect(() => {
-    if (url) {
-      detectObj(url);
+    if (upBtn.current.value) {
+      // detectObj(url);
     }
-  }, [url]);
+  }, [url, upBtn]);
   const handleChange = (event) => {
     setUrl(event.target.value);
-    console.log(event.target.value, "kjj");
+  };
+  const handDetect = () => {
+    detectObj(url);
   };
   const handleClick = (event) => {
     upBtn.current.click();
+    resetObj();
+  };
+  const handleImg = (e) => {
+    getBase64(e.target.files[0]).then((data) => {
+      detectObLoc(e.target.files[0]);
+      setUrl(data);
+    });
+  };
+
+  const getBase64 = (file) => {
+    return new Promise((resolve, reject) => {
+      const reader = new FileReader();
+      reader.readAsDataURL(file);
+      reader.onload = () => resolve(reader.result);
+      reader.onerror = (error) => reject(error);
+    });
   };
   return (
     <div className='object-detection'>
@@ -30,12 +49,22 @@ const Objectsdetector = () => {
         value={url}
         placeholder='Image url...'
       />
-      <input
-        type='button'
-        className='up-btn upload-btn'
-        value='DETECT'
-        onClick={handleClick}
-      />
+      {url.trim() === "" ? (
+        <input
+          type='button'
+          className='up-btn upload-btn'
+          value='UPLOAD'
+          onClick={handleClick}
+        />
+      ) : (
+        <input
+          type='button'
+          className='up-btn upload-btn'
+          value='DETECT'
+          onClick={handDetect}
+        />
+      )}
+
       <input
         type='file'
         name='UPLOAD'
@@ -43,8 +72,9 @@ const Objectsdetector = () => {
         id=''
         hidden
         ref={upBtn}
-        onChange={handleChange}
+        onChange={handleImg}
       />
+      {url && <Canvas url={url} />}
     </div>
   );
 };

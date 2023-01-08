@@ -7,14 +7,16 @@ import modalReducer from "./modalReducer";
 import {
   GET_TRANSLATION,
   UPDATE_LANGUAGES,
-  SET_AUDIO,
+  DETECT_OBJECT,
   RESET_FIELDS,
+  RESET_OBJ,
 } from "../types";
 const ModalState = (props) => {
   const initialState = {
     userText: "",
     translatedText: "",
     audio: null,
+    objects: null,
     languages: [],
   };
 
@@ -48,20 +50,45 @@ const ModalState = (props) => {
     dispatch({ type: UPDATE_LANGUAGES, payload: data });
   };
 
-  const detectObj = async (image) => {
-    const data = require(image);
-    console.log(image);
+  const detectObj = async (url) => {
+    try {
+      fetch(url)
+        .then((res) => res.blob())
+        .then(async (blob) => {
+          const response = await fetch(
+            "https://api-inference.huggingface.co/models/facebook/detr-resnet-50",
+            {
+              headers: {
+                Authorization: `Bearer ${process.env.REACT_APP_API_TOKEN}`,
+              },
+              method: "POST",
+              body: blob,
+            }
+          );
+          const result = await response.json();
+          dispatch({ type: DETECT_OBJECT, payload: result });
+        });
+    } catch (error) {
+      console.log(error.message);
+    }
+  };
+  const detectObLoc = async (img) => {
+    img.arrayBuffer().then(async (arrayBuffer) => {
+      const blob = new Blob([new Uint8Array(arrayBuffer)], { type: img.type });
+      const response = await fetch(
+        "https://api-inference.huggingface.co/models/facebook/detr-resnet-50",
+        {
+          headers: {
+            Authorization: `Bearer ${process.env.REACT_APP_API_TOKEN}`,
+          },
+          method: "POST",
+          body: blob,
+        }
+      );
+      const result = await response.json();
 
-    // const response = await axios.post(
-    //   "https://api-inference.huggingface.co/models/facebook/detr-resnet-50",
-    //   data,
-    //   {
-    //     headers: {
-    //       Authorization: `Bearer ${process.env.REACT_APP_API_TOKEN}`,
-    //     },
-    //   }
-    // );
-    // console.log(JSON.stringify(response));
+      dispatch({ type: DETECT_OBJECT, payload: result });
+    });
   };
 
   const readText = async (text) => {
@@ -107,17 +134,23 @@ const ModalState = (props) => {
     );
     return res;
   };
+  const resetObj = () => {
+    dispatch({ type: RESET_OBJ });
+  };
   return (
     <modalContext.Provider
       value={{
         translatedText: state.translatedText,
         languages: state.languages,
         audio: state.audio,
+        objects: state.objects,
         getTranslation,
         updateLanguages,
         detectObj,
         readText,
         readTextRapidApi,
+        detectObLoc,
+        resetObj,
       }}
     >
       {props.children}

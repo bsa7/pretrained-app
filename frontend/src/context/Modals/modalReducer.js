@@ -4,7 +4,8 @@ import {
   GET_TRANSLATION,
   UPDATE_LANGUAGES,
   RESET_FIELDS,
-  SET_AUDIO,
+  DETECT_OBJECT,
+  RESET_OBJ,
 } from "../types";
 
 const modalReducer = (state, action) => {
@@ -20,15 +21,20 @@ const modalReducer = (state, action) => {
         ...state,
         languages: action.payload,
       };
-    case SET_AUDIO:
+    case DETECT_OBJECT:
       return {
         ...state,
-        audio: action.payload,
+        objects: action.payload,
       };
     case RESET_FIELDS:
       return {
         ...state,
         translatedText: action.payload,
+      };
+    case RESET_OBJ:
+      return {
+        ...state,
+        objects: null,
       };
     default:
       return state;

@@ -1,3 +1,5 @@
+/** @format */
+
 import { useContext, useState, useEffect } from "react";
 import ModalContext from "../../context/Modals/modalContext";
 import DropDownMenu from "../DropDownMenu";
@@ -16,11 +18,19 @@ const Translator = () => {
 
   const handleChange = (event) => {
     setUserText(event.target.value);
-    getTranslation(event.target.value);
+  };
+  const translate = () => {
+    getTranslation(userText);
   };
   return (
     <div className='tr-widget'>
       <div className='menu'>
+        {!(origin === "" || to === "" || userText.trim() === "") && (
+          <div className='translate-btn' onClick={translate}>
+            <i className='fa-solid fa-language'></i>
+          </div>
+        )}
+
         <DropDownMenu
           className='left_child'
           setOrigin={setOrigin}
@@ -36,6 +46,7 @@ const Translator = () => {
           holder={origin}
         />
       </div>
+
       <textarea
         name='originalText'
         cols='30'

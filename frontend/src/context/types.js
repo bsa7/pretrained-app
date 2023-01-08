@@ -3,4 +3,5 @@
 export const GET_TRANSLATION = "GET_TRANSLATION";
 export const UPDATE_LANGUAGES = "UPDATE_LANGUAGES";
 export const RESET_FIELDS = "RESET_FIELDS";
-export const SET_AUDIO = "SET_AUDIO";
+export const DETECT_OBJECT = "DETECT_OBJECT";
+export const RESET_OBJ = "RESET_OBJ";
