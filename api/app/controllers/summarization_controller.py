@@ -12,7 +12,9 @@ class SummarizationController(ApplicationController):
 
   def index(self):
     ''' This action show text summarization page '''
+    logging.info(f'{self._params()=}')
     source_text = self._params().get('source_text')
+    logging.info(f'{source_text=}')
     logging.info(f'Text  {source_text=} --------------------')
     summarization_result = self.text_summarizer.summarize_text(source_text)
     return self.render(locals = { 'source_text': source_text, 'summarization_result': summarization_result })
