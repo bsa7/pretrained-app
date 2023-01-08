@@ -1,4 +1,10 @@
-# Web application using a Pretrained Machine Learning Model
+# Project Team 
+[Belevsky S.A.](https://github.com/bsa7) - Team Lead, application infrastructure.
+[Makeev V.A.](https://github.com/smak6) - integration of the text autoreference model.
+[Telegin A.S.](https://github.com/AleksandrTelegin) - integration of the image classification model.
+[Sidi Ould H Maida Maida Mohamed Sheikh](https://github.com/H-KC) - application frontend development and integration of javascript models.
+
+# Web application using a Pretrained Machine Learning Models
 
 ![ESLint](https://github.com/bsa7/pretrained-app/actions/workflows/eslint.yml/badge.svg)&nbsp;
 ![Pylint](https://github.com/bsa7/pretrained-app/actions/workflows/pylint.yml/badge.svg)&nbsp;
