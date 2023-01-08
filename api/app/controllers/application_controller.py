@@ -17,7 +17,7 @@ class ApplicationController:
 
   def _params(self) -> dict:
     ''' Returns rest parameters '''
-    return dict(request.args)
+    return request.get_json(force = True)
 
   def _files(self) -> dict:
     ''' Returns files, attached in post request '''

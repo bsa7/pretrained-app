@@ -1,0 +1,7 @@
+en:
+  silero:
+    isnt_ready: Application busy. Wait, please.
+    recognition_status_description:
+      idle: Nothing to do. Awaiting recognition tasks.
+      queued: Task accepted. Preparing to recognition.
+      error: There are error occured while start recognition.

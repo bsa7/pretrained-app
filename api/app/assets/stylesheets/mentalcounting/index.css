@@ -1,0 +1,25 @@
+.noise-status {
+  display: block;
+  padding: 20px;
+  font-size: 14px;
+}
+
+.recognition-result {
+  font-size: 30px;
+  color: crimson;
+}
+
+.visualizer--container {
+  background-color: aquamarine;
+  position: fixed;
+  top: 11px;
+  right: 11px;
+  width: 100px;
+  height: 100px;
+}
+
+canvas.visualizer {
+  width: 100%;
+  height: 100%;
+  margin: 0;
+}

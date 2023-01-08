@@ -11,4 +11,5 @@ ssh deploy@$STAGING_HOST "\
   ln -sf $APP_PATH/stages/$STAGE/docker-compose.yml $APP_PATH/docker-compose.yml \
   && cd $APP_PATH \
   && docker-compose build \
-  && docker-compose up -d"
+  && docker-compose up -d \
+  && docker system prune --force"

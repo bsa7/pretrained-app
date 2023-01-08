@@ -1,16 +1,20 @@
 FROM nikolaik/python-nodejs:python3.10-nodejs18
 
+RUN apt-get update
+RUN apt-get install ffmpeg libasound-dev libportaudio2 libportaudiocpp0 portaudio19-dev -y
+RUN apt-get install libsdl1.2-dev libsdl-image1.2 libsdl-mixer1.2 libsdl-ttf2.0 -y
 USER pn
 
+ENV SDL_AUDIODRIVER="dsp"
 ENV LANG=C.UTF-8
 ENV LANGUAGE=en_US:en
 ENV LC_ALL=C.UTF-8
 ENV MODE=production
-
 ENV APP_PATH=/home/pn/api
 ENV PATH="${PATH}:/home/pn/.local/bin"
 WORKDIR $APP_PATH
 EXPOSE 5000
+RUN mkdir -p ./api/tmp
 COPY --chown=pn:pn ./api/requirements.txt ./requirements.txt
 RUN pip install --upgrade pip && \
     pip install setuptools==65.5.1 && \

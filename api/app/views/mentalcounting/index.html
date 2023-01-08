@@ -1,0 +1,23 @@
+{% extends 'layouts/application.html' %}
+{% block head %}
+<link rel="stylesheet" href="{{ url_for('static', filename='stylesheets/mentalcounting/index.css') }}">
+<script src="{{ url_for('static', filename='javascript/mentalcounting/audio_stream_analyzer.js') }}" ></script>
+<script src="{{ url_for('static', filename='javascript/mentalcounting/audio_stream_visualizer.js') }}" ></script>
+<script src="{{ url_for('static', filename='javascript/mentalcounting/audio_stream.js') }}" ></script>
+<script src="{{ url_for('static', filename='javascript/mentalcounting/info_block.js') }}" ></script>
+{% endblock head %}
+
+{% block content %}
+  <h2>Говорите.</h2>
+  <p>Паузы длиннее секунды разделяют фразы.</p>
+  <div>
+    <div id="recognition-result" class="recognition-result"></div>
+    <div class="noise-status"></div>
+  </div>
+  <div class="visualizer--container">
+    <canvas class="visualizer"></canvas>
+  </div>
+  <script type="text/javascript">
+    const audioStream = new AudioStream()
+  </script>
+{% endblock content %}
