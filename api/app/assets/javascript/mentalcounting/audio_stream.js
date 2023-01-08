@@ -93,9 +93,9 @@ class AudioStream {
       headers: this.audioHeaders,
       path: '/mental_counting/recognize_speech',
     })
+    console.log(response)
     if (response.status == 'success') {
       this.infoBlock.push(response.text)
-      // document.querySelector('#recognition-result').innerText = response.text
     }
   }
 }

@@ -1,4 +1,4 @@
-# Project Team 
+# Project Team
 * [Belevsky S.A.](https://github.com/bsa7) - Team Lead, application infrastructure.
 * [Makeev V.A.](https://github.com/smak6) - integration of the text autoreference model.
 * [Telegin A.S.](https://github.com/AleksandrTelegin) - integration of the image classification model.
@@ -11,7 +11,7 @@
 ![Ward](https://github.com/bsa7/pretrained-app/actions/workflows/ward.yml/badge.svg)&nbsp;
 ![Deploy production](https://github.com/bsa7/pretrained-app/actions/workflows/cd-production.yml/badge.svg?branch=main)
 ## Working example
-Follow this [link](https://pretrained-app.jsdev.cyou) to open application.
+Follow this [link](https://staging-pretrained-app.jsdev.cyou/welcome) to open application.
 Our application collaborated on pure entusiasm, so we have no abilities to by expensive SSL certs now. Please take this into account when you see a browser message about a security issue with the site.
 
 ## Install and run application for development
