@@ -1,7 +1,7 @@
 ''' This file defines a fixtures to dry your tests '''
 from ward import fixture
 from splinter import Browser
-from tests.base.application_test_case import Application
+from tests_folder.base.application_test_case import Application
 
 @fixture
 def app_context():

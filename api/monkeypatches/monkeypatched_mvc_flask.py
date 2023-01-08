@@ -7,10 +7,10 @@ from mvc_flask import FlaskMVC
 
 class MonkeypatchedFlaskMVC(FlaskMVC):
   ''' Redefine init_app method of original FlaskMVC.'''
-  # We remove that code after mainteners satisfy that issue:
-  # https://github.com/marcuxyz/mvc-flask/issues/29
+  # pylint: disable=too-few-public-methods
 
   def init_app(self, app: Flask = None, path="app"):
+    ''' This method redefined original method '''
     template_folder = app.template_folder
     super().init_app(app, path)
     if template_folder is not None:

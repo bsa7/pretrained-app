@@ -2,10 +2,10 @@
 
 from flask import url_for
 from ward import each, test
-from tests.fixtures import client, browser
+from tests_folder.fixtures import client, browser
 import pdb
 
-@test('Возвращает статус 200 for GET запроса', tags=['request', 'text_summarization'])
+@test('Возвращает статус 200 для GET запроса', tags=['request', 'text_summarization'])
 def _(client = client, resource = each('summarization')):
   response = client.get(url_for(f'{resource}.index'))
   assert response.status_code == 200
@@ -20,7 +20,7 @@ def _(client = client, resource = each('summarization')):
   response = client.get(url_for(f'{resource}.index'))
   assert 'value = "Выполнить автореферирование"' in response.text
 
-@test('На странице /summarization находится поле ввода для адреса изображения', tags=['request', 'text_summarization', 'current'])
+@test('На странице /summarization находится поле ввода для адреса изображения', tags=['request', 'text_summarization'])
 def _(client=client, resource=each('summarization')):
   response = client.get(url_for(f'{resource}.index'))
   assert '<textarea' in response.text

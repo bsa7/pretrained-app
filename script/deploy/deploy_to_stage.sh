@@ -10,6 +10,9 @@ rsync -e "ssh -o StrictHostKeyChecking=no" \
 ssh deploy@$STAGING_HOST "\
   ln -sf $APP_PATH/stages/$STAGE/docker-compose.yml $APP_PATH/docker-compose.yml \
   && cd $APP_PATH \
+  && mkdir -p api/tmp \
+  && mkdir -p api/log \
+  && touch api/log/production.log \
   && docker-compose build \
   && docker-compose up -d \
   && docker system prune --force"

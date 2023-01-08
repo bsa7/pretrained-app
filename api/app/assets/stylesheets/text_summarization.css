@@ -1,11 +1,18 @@
 .summarization-result {
   display: block;
-  padding: 40px;
+  padding: 20px 0;
+}
+
+.summarization--source-text {
+  width: 100%;
+  height: 200px;
+  border-radius: 4px;
 }
 
 .summarization-result--header {
   display: block;
   font-size: 16px;
+  font-weight: 700;
 }
 
 .summarization-result--content {

@@ -1,4 +1,16 @@
 {% extends 'layouts/application.html' %}
+
+{% block head %}
+<link rel="stylesheet" href="{{ url_for('static', filename='stylesheets/welcome.css') }}">
+{% endblock head %}
+
 {% block content %}
-<h2>Welcome page</h2>
+<h2>Страницы с предварительно обученными моделями</h2>
+<div class="index-links">
+  <ul>
+    <li><a class="index-links--link" href="/image_classifier">Классификация объектов на изображении</a></li>
+    <li><a class="index-links--link" href="/summarization">Автореферирование текста</a></li>
+    <li><a class="index-links--link" href="/mental_counting">Распознавание речи</a></li>
+  </ul>
+</div>
 {% endblock content %}

@@ -7,20 +7,19 @@
 {% block content %}
 <h2 class="header">Автореферат текста онлайн.</h2>
 
-<div class="description">
-  <p>Введите текст для суммаризации</p>
-</div>
+<div class="summarization">
 
-<form action="summarization" method="get">
-  <p>
-    <label for="source_text">Введите текст:</label>
-    <textarea class="form-field long-text" type="text" name="source_text">{{locals['source_text']}}</textarea>
-  </p>
-  <input class="btn form-field" type="submit" value = "Выполнить автореферирование" />
-</form>
+  <form action="summarization" method="get">
+    <p>
+      <label for="source_text">Введите текст:</label>
+      <textarea class="form-field long-text summarization--source-text" type="text" name="source_text">{{locals['source_text']}}</textarea>
+    </p>
+    <input class="btn form-field" type="submit" value = "Выполнить автореферирование" />
+  </form>
 
-<div class="summarization-result">
-  <div class="summarization-result--header">Результат автореферирования</div>
-  <div class="summarization-result--content">{{locals['summarization_result']}}</div>
+  <div class="summarization-result">
+    <div class="summarization-result--header">Результат автореферирования:</div>
+    <div class="summarization-result--content">{{locals['summarization_result']}}</div>
+  </div>
 </div>
 {% endblock content %}

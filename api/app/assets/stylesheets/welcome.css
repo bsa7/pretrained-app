@@ -1,0 +1,8 @@
+.index-links {
+  display: flex;
+  flex-direction: column;
+}
+
+.index-links--link {
+  text-decoration: none;
+}

@@ -16,8 +16,16 @@ class ApplicationController:
     return payload
 
   def _params(self) -> dict:
-    ''' Returns rest parameters '''
-    return request.get_json(force = True)
+    ''' Returns rest  http parameters '''
+    try:
+      request_params = request.get_json(force = True)
+    except:
+      request_params = {}
+
+    request_args = request.args.to_dict()
+    request_params = { **request_params, **request_args }
+
+    return request_params
 
   def _files(self) -> dict:
     ''' Returns files, attached in post request '''
