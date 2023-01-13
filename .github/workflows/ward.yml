@@ -25,7 +25,7 @@ jobs:
         python -m pip install --upgrade pip
         mkdir -p ./api/log
         touch ./api/log/test.log
-        cp ./api/.env.example ./api/.env
+        cp ./stages/github_actions/.env.example ./api/.env
         pip install -r ./api/requirements.txt
     - name: Testing the code with ward
       run: |
