@@ -10,6 +10,7 @@ class ApplicationTestCase():
   def app(self):
     ''' Initializes application test instance '''
     app = Application(__name__).app
+    print(f'{app=}')
     return app
 
   @property

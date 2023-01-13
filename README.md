@@ -27,3 +27,6 @@ Our application collaborated on pure entusiasm, so we have no abilities to by ex
 
 ## Deployment
 [Here](./docs/deployment.md) you can read information about deployment process to production and staging hosts.
+
+## Application secrets
+[Here](./docs/secrets.md) read about application secrets
