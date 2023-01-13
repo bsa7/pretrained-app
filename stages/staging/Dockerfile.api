@@ -12,7 +12,7 @@ ENV MODE=production
 
 ENV APP_PATH=/home/pn/api
 RUN mkdir -p $APP_PATH/log
-RUN touch $APP_PATH/log/staging.log
+RUN touch $APP_PATH/log/production.log
 ENV PATH="${PATH}:/home/pn/.local/bin"
 ENV API_ENV=production
 WORKDIR $APP_PATH
