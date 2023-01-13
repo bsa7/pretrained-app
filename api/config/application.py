@@ -2,6 +2,7 @@
 
 import logging
 from pathlib import Path
+from dotenv import load_dotenv
 from flask import Flask
 from flask_cors import CORS
 from monkeypatches.monkeypatched_mvc_flask import MonkeypatchedFlaskMVC
@@ -24,6 +25,7 @@ class Application:
   def initialize_core(self):
     '''Initializes mvc flask app'''
     self.app.config['EXPLAIN_TEMPLATE_LOADING'] = True
+    load_dotenv()
     MonkeypatchedFlaskMVC(self.app, path = 'app')
     CORS(self.app)
 
