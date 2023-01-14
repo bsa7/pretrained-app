@@ -1,0 +1,331 @@
+/** @format */
+
+@import url("https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;500&display=swap");
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Roboto", sans-serif;
+}
+
+body {
+  overflow: hidden;
+  background-color: #ffeedd;
+}
+
+.App {
+  display: flex;
+  flex-direction: column;
+}
+
+/* common style */
+.main {
+  display: flex;
+}
+/* ------------------------- */
+
+/* Navbar style */
+/* ------------------------- */
+.navbar {
+  padding: 14px;
+  /* margin-bottom: 4px; */
+  background-color: #0093e9;
+  background-image: linear-gradient(160deg, #0093e9 0%, #80d0c7 100%);
+}
+.navbar ul {
+  list-style-type: none;
+  display: flex;
+}
+.navbar ul li {
+  margin: 0 4px;
+}
+.navbar ul li a {
+  color: rgb(238, 237, 237);
+  text-decoration: none;
+  padding: 10px;
+  font-weight: 500;
+  text-transform: uppercase;
+  position: relative;
+}
+.navbar ul li a:hover {
+  background-color: rgba(118, 255, 232, 0.178);
+}
+/* ------------------------------------- */
+/* Modals page style */
+.container {
+  display: flex;
+  flex-direction: column;
+}
+.section {
+  width: 100%;
+  height: 100vh;
+  display: flex;
+}
+.section-1 {
+  position: relative;
+  display: flex;
+  text-align: center;
+  flex-direction: column;
+  align-items: center;
+}
+.section-1 h1 {
+  text-transform: uppercase;
+  color: #ffffff;
+
+  margin: 0 1rem 4rem 1rem;
+  font-size: 0rem;
+  /* border: 1px solid #f7ce68; */
+  transition: all 1s;
+}
+.item-holder:hover h1 {
+  font-size: 3rem;
+}
+.card-deck {
+  display: flex;
+  /* align-items: center;
+  justify-content: center; */
+  flex-wrap: wrap;
+}
+.card {
+  margin: 5px;
+  border-radius: 5px;
+  width: 30vw;
+  margin-top: 2rem;
+}
+.card__image {
+  font-size: 1rem;
+  transition: all 1s;
+}
+.card__image > img {
+  transition: all 1s;
+}
+.card__image > img:hover {
+  transform: scale(1.2);
+}
+.card__content {
+  background-color: #f7ce68;
+  color: white;
+  border-radius: 5px;
+  padding: 3px;
+}
+.card__content > p {
+  color: #1f1f1f;
+}
+.card__content h2 {
+  margin: 2px 2px 4px 2px;
+}
+.item-holder {
+  /* border-top: 2px solid rgb(0, 0, 0); */
+  background-color: #0093e9;
+  background-image: linear-gradient(160deg, #0093e9 0%, #80d0c7 100%);
+  border-radius: 0 0 50px 50px;
+}
+
+.section-2 {
+  background-color: #0093e9;
+}
+.section-3 {
+  background-color: #000000;
+}
+/* ------------------------------------- */
+
+/* Modals page style */
+.modals {
+  flex-direction: column;
+}
+.side-bar {
+  display: flex;
+  /* flex-direction: column; */
+  padding: 10px;
+  height: 100%;
+  justify-content: center;
+  color: rgb(255, 255, 255);
+
+  /* margin-top: 10px; */
+  /* height: 25vh; */
+}
+.side-bar * {
+  margin: 6px;
+  padding: 12px;
+  text-align: center;
+  /* border: 1px solid rgb(216, 216, 216); */
+  border-radius: 4px;
+  width: 20rem;
+  /* height: 10rem; */
+  /* background-color: #fbab7e;
+  background-image: linear-gradient(62deg, #fbab7e 0%, #f7ce68 100%); */
+  background-color: #0093e9;
+  background-image: linear-gradient(160deg, #0093e9 0%, #80d0c7 100%);
+
+  cursor: pointer;
+}
+.active_card {
+  background-image: linear-gradient(62deg, #fbab7e 0%, #f7ce68 100%);
+}
+/* object detection modal */
+.object-detection {
+  display: flex;
+  height: 100vh;
+  align-items: flex-start;
+  justify-content: center;
+}
+.board {
+  position: absolute;
+  max-width: 500px;
+  max-height: 500px;
+  background-color: #f5f5f5;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  top: 11rem;
+}
+.up-btn {
+  outline: none;
+  border: none;
+  padding: 10px 20px;
+}
+.upload-btn {
+  margin: 0 8px;
+  border: 1px solid black;
+}
+.url-btn {
+  width: 40rem;
+  padding: 10px;
+}
+.image_holder {
+  display: flex;
+  flex-direction: row;
+  height: 80vh;
+  justify-content: center;
+}
+.image_holder img {
+  width: 30rem;
+}
+
+/* translator modal */
+.tr-widget {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 3rem;
+}
+.translate-btn {
+  position: absolute;
+  right: 1rem;
+  bottom: -11rem;
+
+  font-size: 1.5rem;
+  cursor: pointer;
+  transition: all 1s;
+}
+.translate-btn:hover {
+  color: rgb(26, 126, 177);
+}
+.tr-widget textarea {
+  width: 40rem;
+
+  resize: none;
+  border: none;
+
+  background-color: #f1dabf;
+  padding: 10px;
+  /* filter: drop-shadow(0.15rem 0.1rem 0.4rem rgba(0, 0, 0, 0.1)); */
+}
+.tr-widget .bottom_child {
+  border-radius: 0 0 1rem 1rem;
+  border-top: 1px solid rgb(243, 185, 185);
+}
+.tr-widget textarea:focus-visible {
+  outline: none;
+}
+/* --------------test--------------- */
+
+.menu {
+  display: flex;
+  position: relative;
+}
+.language_drop {
+  padding: 6px 18px;
+  width: 20rem;
+  height: 3rem;
+  font-size: 1rem;
+  outline: none;
+  border: none;
+  background: transparent;
+  border-top: 1px solid rgb(243, 185, 185);
+  border-bottom: 1px solid rgb(243, 185, 185);
+  text-align: center;
+}
+.language_drop .left_child {
+  border-radius: 1rem 0 0 0;
+}
+.language_drop .right_child {
+  border-radius: 0 1rem 0 0;
+}
+/* ------------------------------------- */
+/* About page style */
+.about {
+  flex-direction: column;
+  position: relative;
+  align-items: center;
+  margin-top: 16px;
+
+  /* transform: translate(-50, -50%); */
+}
+.about * {
+  margin-bottom: 8px;
+}
+
+/* --------------Text to speech --------------- */
+.text-container {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.top-tools {
+  width: 40rem;
+  display: flex;
+  justify-content: space-between;
+}
+.top-tools div {
+  width: 100rem;
+  background-color: #7eb5f5;
+  text-align: center;
+  color: white;
+  border-bottom: 1px solid rgb(243, 185, 185);
+  border-top: 1px solid rgb(243, 185, 185);
+  border-right: 1px solid rgb(243, 185, 185);
+}
+.top-tools:first-child {
+  border-left: 1px solid rgb(243, 185, 185);
+}
+.top-tools div p {
+  padding: 5px;
+  cursor: pointer;
+}
+.play-btn {
+  position: absolute;
+  right: 1rem;
+  bottom: 1rem;
+  font-size: 1.5rem;
+  transition: all 1s;
+}
+.play-btn:hover {
+  color: rgb(243, 185, 185);
+  rotate: -180deg;
+}
+.text-area {
+  position: relative;
+  cursor: pointer;
+}
+.text-area textarea {
+  width: 40rem;
+  resize: none;
+  border: none;
+  border-radius: 0 0 1rem 1rem;
+  background-color: #f1dabf;
+  padding: 10px;
+  outline: none;
+}
