@@ -1,10 +1,9 @@
+/** @format */
+
 import React from "react";
 import { Link } from "react-router-dom";
 
 const Navbar = () => {
-  // TODO:
-  // * add transition to navbar
-  // * add a logo
   return (
     <div className='navbar'>
       <ul>
