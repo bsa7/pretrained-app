@@ -6,7 +6,7 @@ import {
   RESET_FIELDS,
   DETECT_OBJECT,
   RESET_OBJ,
-} from "../types";
+} from '../types';
 
 const modelReducer = (state, action) => {
   switch (action.type) {

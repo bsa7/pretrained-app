@@ -8,12 +8,12 @@ import IconButton from '@mui/material/IconButton';
 import MenuIcon from '@mui/icons-material/Menu';
 
 interface AppBarProps {
-  handleToggle: any
-  children: any
+  handleToggle: unknown
+  children: unknown
   title: string
 }
 
-export default function ButtonAppBar(appBarProps: AppBarProps) {
+const ButtonAppBar = (appBarProps: AppBarProps) => {
   const { handleToggle, title } = appBarProps
 
   return (
@@ -27,7 +27,7 @@ export default function ButtonAppBar(appBarProps: AppBarProps) {
           sx={{ mr: 2 }}
           onClick={handleToggle}
         >
-          <MenuIcon />
+          <MenuIcon/>
         </IconButton>
         <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
           {title}
@@ -37,3 +37,5 @@ export default function ButtonAppBar(appBarProps: AppBarProps) {
     </AppBar>
   );
 }
+
+export default ButtonAppBar

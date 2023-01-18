@@ -1,11 +1,11 @@
 /** @format */
 
-import React, { useRef, useState, useEffect, useContext } from "react";
-import ModelContext from "../../context/Models/modelContext";
-import Canvas from "../../components/Canvas";
+import React, { useRef, useState, useEffect, useContext } from 'react';
+import ModelContext from '../../context/Models/modelContext';
+import Canvas from '../../components/Canvas';
 
 const ObjectsDetector = () => {
-  const [url, setUrl] = useState("");
+  const [url, setUrl] = useState('');
   const upBtn = useRef(null);
   const modelContext = useContext(ModelContext);
   const { detectObj, detectObLoc, resetObj } = modelContext;
@@ -14,21 +14,18 @@ const ObjectsDetector = () => {
       // detectObj(url);
     }
   }, [url, upBtn]);
+
   const handleChange = (event) => {
     setUrl(event.target.value);
   };
+
   const handDetect = () => {
     detectObj(url);
   };
+
   const handleClick = (event) => {
     upBtn.current.click();
     resetObj();
-  };
-  const handleImg = (e) => {
-    getBase64(e.target.files[0]).then((data) => {
-      detectObLoc(e.target.files[0]);
-      setUrl(data);
-    });
   };
 
   const getBase64 = (file) => {
@@ -39,42 +36,50 @@ const ObjectsDetector = () => {
       reader.onerror = (error) => reject(error);
     });
   };
+
+  const handleImg = (e) => {
+    getBase64(e.target.files[0]).then((data) => {
+      detectObLoc(e.target.files[0]);
+      setUrl(data);
+    });
+  };
+
   return (
-    <div className='object-detection'>
+    <div className="object-detection">
       <input
-        type='url'
-        name='image-url'
-        className='url-btn'
+        type="url"
+        name="image-url"
+        className="url-btn"
         onChange={handleChange}
         value={url}
-        placeholder='Image url...'
+        placeholder="Image url..."
       />
-      {url.trim() === "" ? (
+      {url.trim() === '' ? (
         <input
-          type='button'
-          className='up-btn upload-btn'
-          value='UPLOAD'
+          type="button"
+          className="up-btn upload-btn"
+          value="UPLOAD"
           onClick={handleClick}
         />
       ) : (
         <input
-          type='button'
-          className='up-btn upload-btn'
-          value='DETECT'
+          type="button"
+          className="up-btn upload-btn"
+          value="DETECT"
           onClick={handDetect}
         />
       )}
 
       <input
-        type='file'
-        name='UPLOAD'
-        accept='image/*'
-        id=''
+        type="file"
+        name="UPLOAD"
+        accept="image/*"
+        id=""
         hidden
         ref={upBtn}
         onChange={handleImg}
       />
-      {url && <Canvas url={url} />}
+      {url && <Canvas url={url}/>}
     </div>
   );
 };

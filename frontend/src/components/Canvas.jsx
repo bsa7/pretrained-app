@@ -1,13 +1,9 @@
-/**
- * eslint-disable react-hooks/exhaustive-deps
- *
- * @format
- */
+import React, { useRef, useEffect, useContext } from 'react';
+import ModelContext from '../context/Models/modelContext';
+import { colors } from '../constants/colors'
 
-/** @format */
-import React, { useRef, useEffect, useContext } from "react";
-import ModelContext from "../context/Models/modelContext";
-const Canvas = ({ url }) => {
+const Canvas = (canvasProps) => {
+  const { url } = canvasProps
   const canvas = useRef();
   let ctx = null;
   const modelContext = useContext(ModelContext);
@@ -15,7 +11,7 @@ const Canvas = ({ url }) => {
   // draw rectangle
   const drawRect = (info, style, det) => {
     const { xmin, ymin, xmax, ymax } = info;
-    const { borderColor = "black", borderWidth = 1 } = style;
+    const { borderColor = 'black', borderWidth = 1 } = style;
 
     ctx.beginPath();
     ctx.strokeStyle = borderColor;
@@ -26,9 +22,9 @@ const Canvas = ({ url }) => {
     ctx.globalAlpha = 0.1;
     ctx.fillRect(xmin, ymin, xmax, ymax);
 
-    ctx.font = "12px Georgia";
+    ctx.font = '12px Georgia';
     ctx.globalAlpha = 1;
-    ctx.fillStyle = "black";
+    ctx.fillStyle = 'black';
     ctx.fillText(`${det.label}-${det.score}%`, xmin + 2, ymin + 12);
   };
 
@@ -55,88 +51,37 @@ const Canvas = ({ url }) => {
       });
     }
   };
+
   // initialize the canvas context
   useEffect(() => {
     // dynamically assign the width and height to canvas
     const canvasEle = canvas.current;
 
     // get context of the canvas
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-    ctx = canvasEle.getContext("2d");
+    ctx = canvasEle.getContext('2d');
     if (url) {
-      var imageObj1 = new Image();
+      const imageObj1 = new Image();
       imageObj1.src = url;
 
-      imageObj1.onload = function () {
+      const handleImageLoad = () => {
         canvasEle.width = imageObj1.width * 0.5;
         canvasEle.height = imageObj1.height * 0.5;
         ctx.drawImage(imageObj1, 0, 0, canvasEle.width, canvasEle.height);
-      };
+      }
+
+      imageObj1.onload = handleImageLoad;
     }
   }, [url, objects]);
   useEffect(() => {}, [objects, url]);
 
   return (
     <canvas
-      className='board'
+      className="board"
       ref={canvas}
-      width='100'
-      height='100'
+      width="100"
+      height="100"
       onClick={draw}
-    ></canvas>
+    />
   );
 };
 export default Canvas;
-
-const colors = [
-  "#FF6633",
-  "#FFB399",
-  "#FF33FF",
-  "#FFFF99",
-  "#00B3E6",
-  "#E6B333",
-  "#3366E6",
-  "#999966",
-  "#99FF99",
-  "#B34D4D",
-  "#80B300",
-  "#809900",
-  "#E6B3B3",
-  "#6680B3",
-  "#66991A",
-  "#FF99E6",
-  "#CCFF1A",
-  "#FF1A66",
-  "#E6331A",
-  "#33FFCC",
-  "#66994D",
-  "#B366CC",
-  "#4D8000",
-  "#B33300",
-  "#CC80CC",
-  "#66664D",
-  "#991AFF",
-  "#E666FF",
-  "#4DB3FF",
-  "#1AB399",
-  "#E666B3",
-  "#33991A",
-  "#CC9999",
-  "#B3B31A",
-  "#00E680",
-  "#4D8066",
-  "#809980",
-  "#E6FF80",
-  "#1AFF33",
-  "#999933",
-  "#FF3380",
-  "#CCCC00",
-  "#66E64D",
-  "#4D80CC",
-  "#9900B3",
-  "#E64D66",
-  "#4DB380",
-  "#FF4D4D",
-  "#99E6E6",
-  "#6666FF",
-];

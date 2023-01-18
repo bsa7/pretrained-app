@@ -1,10 +1,10 @@
 import * as React from 'react';
 import Drawer from '@mui/material/Drawer';
-import AppBar from './utils/AppBar';
-import UserMenu from './utils/UserMenu';
-import { Anchor } from '@/types/components';
 import Container from '@mui/material/Container';
 import Box from '@mui/material/Box';
+import AppBar from './utils/AppBar';
+import UserMenu from './utils/UserMenu';
+import { Anchor } from '../types/components';
 
 interface LayoutProps {
   title: string
@@ -12,7 +12,7 @@ interface LayoutProps {
   children: React.Component
 }
 
-export default function Layout(layoutProps: LayoutProps) {
+const Layout = (layoutProps: LayoutProps) => {
   const [state, setState] = React.useState({
     top: false,
     left: false,
@@ -22,12 +22,12 @@ export default function Layout(layoutProps: LayoutProps) {
   const { children, title, subtitle } = layoutProps
   const anchor = 'left'
 
-  const openDrawer = (anchor: Anchor) => {
-    setState({ ...state, [anchor]: true });
+  const openDrawer = (anchorValue: Anchor) => {
+    setState({ ...state, [anchorValue]: true });
   }
 
-  const closeDrawer = (anchor: Anchor) => {
-    setState({ ...state, [anchor]: false });
+  const closeDrawer = (anchorValue: Anchor) => {
+    setState({ ...state, [anchorValue]: false });
   }
 
   return (
@@ -36,21 +36,22 @@ export default function Layout(layoutProps: LayoutProps) {
         <AppBar
           handleToggle={() => openDrawer(anchor)}
           title={title}
-          >
-        </AppBar>
+        />
         <Drawer
           anchor={anchor}
           open={state[anchor]}
           onClose={() => closeDrawer(anchor)}
-          >
+        >
           <UserMenu anchor={anchor} onChoose={() => closeDrawer(anchor)}/>
         </Drawer>
-          <Container>
-        <Box sx={{ display: 'block', width: '100%', marginTop: '80px', padding: '20px' }}>
-          {children}
-        </Box>
-          </Container>
+        <Container>
+          <Box sx={{ display: 'block', width: '100%', marginTop: '80px', padding: '20px' }}>
+            {children}
+          </Box>
+        </Container>
       </>
     </React.Fragment>
   );
 }
+
+export default Layout

@@ -11,15 +11,15 @@ import InfoIcon from '@mui/icons-material/Info';
 import ViewInArIcon from '@mui/icons-material/ViewInAr';
 import TranslateIcon from '@mui/icons-material/Translate';
 import RecordVoiceOverIcon from '@mui/icons-material/RecordVoiceOver';
-import { Anchor } from '@/types/components';
-import { Link } from "react-router-dom";
+import { Link } from 'react-router-dom';
+import { Anchor } from '../../types/components';
 
 interface UserMenuProps {
   anchor: Anchor
-  onChoose: any
+  onChoose: unknown
 }
 
-export default function UserMenu(userMenuProps: UserMenuProps) {
+const UserMenu = (userMenuProps: UserMenuProps) => {
   const { anchor, onChoose } = userMenuProps
 
   return (
@@ -28,55 +28,57 @@ export default function UserMenu(userMenuProps: UserMenuProps) {
       role="presentation"
     >
       <List>
-        <ListItem key='Home' disablePadding>
-          <ListItemButton component={Link} to='/' onClick={onChoose}>
+        <ListItem key="Home" disablePadding>
+          <ListItemButton component={Link} to="/" onClick={onChoose}>
             <ListItemIcon>
-              <HomeIcon />
+              <HomeIcon/>
             </ListItemIcon>
-            <ListItemText primary='Home' />
+            <ListItemText primary="Home"/>
           </ListItemButton>
         </ListItem>
 
-        <Divider />
+        <Divider/>
 
-        <ListItemText primary='Модели:' sx={{ padding: '20px' }} />
+        <ListItemText primary="Модели:" sx={{ padding: '20px' }}/>
 
-        <ListItem key='Models-ObjectDetection' disablePadding>
-          <ListItemButton component={Link} to='/models/image_object_detector' onClick={onChoose}>
+        <ListItem key="Models-ObjectDetection" disablePadding>
+          <ListItemButton component={Link} to="/models/image_object_detector" onClick={onChoose}>
             <ListItemIcon>
-              <ViewInArIcon />
+              <ViewInArIcon/>
             </ListItemIcon>
-            <ListItemText primary='Image object detection' />
+            <ListItemText primary="Image object detection"/>
           </ListItemButton>
         </ListItem>
 
-        <ListItem key='Models-TextToSpeech' disablePadding>
-          <ListItemButton component={Link} to='/models/text_to_speech' onClick={onChoose}>
+        <ListItem key="Models-TextToSpeech" disablePadding>
+          <ListItemButton component={Link} to="/models/text_to_speech" onClick={onChoose}>
             <ListItemIcon>
-              <RecordVoiceOverIcon />
+              <RecordVoiceOverIcon/>
             </ListItemIcon>
-            <ListItemText primary='Text to speech conversion' />
+            <ListItemText primary="Text to speech conversion"/>
           </ListItemButton>
         </ListItem>
 
-        <ListItem key='Models-Translator' disablePadding>
-          <ListItemButton component={Link} to='/models/translator' onClick={onChoose}>
+        <ListItem key="Models-Translator" disablePadding>
+          <ListItemButton component={Link} to="/models/translator" onClick={onChoose}>
             <ListItemIcon>
-              <TranslateIcon />
+              <TranslateIcon/>
             </ListItemIcon>
-            <ListItemText primary='Text translation' />
+            <ListItemText primary="Text translation"/>
           </ListItemButton>
         </ListItem>
 
-        <ListItem key='About' disablePadding>
-          <ListItemButton component={Link} to='/about' onClick={onChoose}>
+        <ListItem key="About" disablePadding>
+          <ListItemButton component={Link} to="/about" onClick={onChoose}>
             <ListItemIcon>
-              <InfoIcon />
+              <InfoIcon/>
             </ListItemIcon>
-            <ListItemText primary='About' />
+            <ListItemText primary="About"/>
           </ListItemButton>
         </ListItem>
       </List>
     </Box>
   );
 }
+
+export default UserMenu
