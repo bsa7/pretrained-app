@@ -3,13 +3,10 @@ module.exports = {
     name: 'PretrainedApp',
     slug: 'PretrainedApp',
     version: '1.0.0',
-    extra: {
-      nodeEnvName: process.env.NODE_ENV,
-    },
     orientation: 'portrait',
     icon: './assets/icon.png',
     userInterfaceStyle: 'light',
-    entryPoint: './src/app.tsx',
+    entryPoint: './src/index.jsx',
     splash: {
       image: './assets/splash.png',
       resizeMode: 'contain',

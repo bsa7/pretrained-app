@@ -148,6 +148,10 @@ module.exports = {
     // But such reexport makes use of external blocks libraries easier.
     'import/named': 'off',
 
+    'no-undef': 'off',
+
+    'import/no-unresolved': 'off',
+
     // Only devDeps and general deps are allowed.
     'import/no-extraneous-dependencies': ['error', {
       devDependencies: true,

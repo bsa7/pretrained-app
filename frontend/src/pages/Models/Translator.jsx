@@ -1,6 +1,8 @@
 /** @format */
 
 import { useContext, useState, useEffect } from 'react';
+import Button from '@mui/material/Button';
+import PlayArrowIcon from '@mui/icons-material/PlayArrow';
 import ModelContext from '../../context/Models/modelContext';
 import DropDownMenu from '../../components/DropDownMenu';
 
@@ -14,23 +16,14 @@ const Translator = () => {
     updateLanguages([origin, to]);
   }, [to, origin, userText]);
 
-  const handleChange = (event) => {
-    setUserText(event.target.value);
-  };
+  const handleChange = (event) => setUserText(event.target.value)
 
-  const translate = () => {
-    getTranslation(userText);
-  };
+  const translate = () => getTranslation(userText)
+  const actionButtonDisabled = origin === '' || to === '' || userText.trim() === ''
 
   return (
     <div className="tr-widget">
       <div className="menu">
-        {!(origin === '' || to === '' || userText.trim() === '') && (
-          <div className="translate-btn" onClick={translate}>
-            <i className="fa-solid fa-language"/>
-          </div>
-        )}
-
         <DropDownMenu
           className="left_child"
           setOrigin={setOrigin}
@@ -66,6 +59,15 @@ const Translator = () => {
         placeholder="translated text....."
         value={translatedText}
       />
+
+      <Button
+        disabled={actionButtonDisabled}
+        onClick={translate}
+        variant="contained"
+      >
+        <PlayArrowIcon/>
+        Translate
+      </Button>
     </div>
   );
 };

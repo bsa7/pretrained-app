@@ -1,6 +1,8 @@
 /** @format */
 
 import React, { useState, useEffect, useContext } from 'react';
+import Button from '@mui/material/Button';
+import PlayArrowIcon from '@mui/icons-material/PlayArrow';
 import ModelContext from '../../context/Models/modelContext';
 
 const TextToSpeech = () => {
@@ -48,6 +50,7 @@ const TextToSpeech = () => {
     setActive(val);
     setUserText(values[val - 1]);
   };
+  const actionButtonEnabled = userText.trim() !== '' && active - 1 !== -1
 
   return (
     <div className="text-container">
@@ -78,11 +81,6 @@ const TextToSpeech = () => {
         </div>
       </div>
       <div className="text-area">
-        {userText.trim() !== '' && active - 1 !== -1 && (
-          <div className="play-btn" onClick={play}>
-            <i className="fa-solid fa-circle-play"/>
-          </div>
-        )}
 
         <textarea
           name="originalText"
@@ -93,6 +91,15 @@ const TextToSpeech = () => {
           onChange={handleChange}
         />
       </div>
+
+      <Button
+        disabled={!actionButtonEnabled}
+        onClick={play}
+        variant="contained"
+      >
+        <PlayArrowIcon/>
+        Speak!
+      </Button>
     </div>
   );
 };

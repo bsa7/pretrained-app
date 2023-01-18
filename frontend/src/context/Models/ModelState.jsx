@@ -1,7 +1,6 @@
-/** @format */
-
 import axios from 'axios';
 import { useReducer } from 'react';
+import { REACT_APP_API_TOKEN } from '@env'
 import modelContext from './modelContext';
 import modelReducer from './modelReducer';
 import {
@@ -36,7 +35,7 @@ const ModelState = (modelStateProps) => {
         text,
         {
           headers: {
-            Authorization: `Bearer ${process.env.REACT_APP_API_TOKEN}`,
+            Authorization: `Bearer ${REACT_APP_API_TOKEN}`,
           },
         },
       );
@@ -64,7 +63,7 @@ const ModelState = (modelStateProps) => {
           'https://api-inference.huggingface.co/models/facebook/detr-resnet-50',
           {
             headers: {
-              Authorization: `Bearer ${process.env.REACT_APP_API_TOKEN}`,
+              Authorization: `Bearer ${REACT_APP_API_TOKEN}`,
             },
             method: 'POST',
             body: blob,
@@ -86,7 +85,7 @@ const ModelState = (modelStateProps) => {
         'https://api-inference.huggingface.co/models/facebook/detr-resnet-50',
         {
           headers: {
-            Authorization: `Bearer ${process.env.REACT_APP_API_TOKEN}`,
+            Authorization: `Bearer ${REACT_APP_API_TOKEN}`,
           },
           method: 'POST',
           body: blob,
@@ -104,7 +103,7 @@ const ModelState = (modelStateProps) => {
         'https://api-inference.huggingface.co/models/Voicemod/fastspeech2-en-male1',
         {
           headers: {
-            Authorization: `Bearer ${process.env.REACT_APP_API_TOKEN}`,
+            Authorization: `Bearer ${REACT_APP_API_TOKEN}`,
           },
           method: 'POST',
           body: JSON.stringify(text),
