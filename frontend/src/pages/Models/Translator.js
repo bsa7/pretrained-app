@@ -1,27 +1,26 @@
 /** @format */
 
 import { useContext, useState, useEffect } from "react";
-import ModalContext from "../../context/Modals/modalContext";
-import DropDownMenu from "../DropDownMenu";
+import ModelContext from "../../context/Models/modelContext";
+import DropDownMenu from "../../components/DropDownMenu";
 const Translator = () => {
-  const modalContext = useContext(ModalContext);
-  const { getTranslation, languages, updateLanguages, translatedText } =
-    modalContext;
+  const modelContext = useContext(ModelContext);
+  const { getTranslation, languages, updateLanguages, translatedText } = modelContext;
   const [userText, setUserText] = useState("");
   const [origin, setOrigin] = useState("");
   const [to, setTo] = useState("");
   useEffect(() => {
     updateLanguages([origin, to]);
-
-    // }
   }, [to, origin, userText]);
 
   const handleChange = (event) => {
     setUserText(event.target.value);
   };
+
   const translate = () => {
     getTranslation(userText);
   };
+
   return (
     <div className='tr-widget'>
       <div className='menu'>
@@ -56,6 +55,7 @@ const Translator = () => {
         onChange={handleChange}
         disabled={origin === "" || to === ""}
       ></textarea>
+
       <textarea
         name='translatedText'
         cols='30'

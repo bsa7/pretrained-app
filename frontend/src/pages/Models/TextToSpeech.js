@@ -1,9 +1,9 @@
 /** @format */
 
 import React, { useState, useEffect, useContext } from "react";
-import ModalContext from "../../context/Modals/modalContext";
+import ModelContext from "../../context/Models/modelContext";
 
-const Texttospeech = () => {
+const TextToSpeech = () => {
   const langs = ["ar-AE-1", "ru-RU-1", "en-US-1", "fr-FR-1"];
   const values = [
     "مرحبا ، هذا اختبار تشغيل.",
@@ -14,8 +14,8 @@ const Texttospeech = () => {
   const [active, setActive] = useState(0);
   const [userText, setUserText] = useState("");
 
-  const modalContext = useContext(ModalContext);
-  const { readText, readTextRapidApi } = modalContext;
+  const modelContext = useContext(ModelContext);
+  const { readText, readTextRapidApi } = modelContext;
   const handleChange = (e) => {
     setUserText(e.target.value);
   };
@@ -99,4 +99,4 @@ const Texttospeech = () => {
   );
 };
 
-export default Texttospeech;
+export default TextToSpeech;

@@ -1,14 +1,14 @@
 /** @format */
 
 import React, { useRef, useState, useEffect, useContext } from "react";
-import ModalContext from "../../context/Modals/modalContext";
-import Canvas from "../Canvas";
+import ModelContext from "../../context/Models/modelContext";
+import Canvas from "../../components/Canvas";
 
-const Objectsdetector = () => {
+const ObjectsDetector = () => {
   const [url, setUrl] = useState("");
   const upBtn = useRef(null);
-  const modalContext = useContext(ModalContext);
-  const { detectObj, detectObLoc, resetObj } = modalContext;
+  const modelContext = useContext(ModelContext);
+  const { detectObj, detectObLoc, resetObj } = modelContext;
   useEffect(() => {
     if (upBtn.current.value) {
       // detectObj(url);
@@ -79,4 +79,4 @@ const Objectsdetector = () => {
   );
 };
 
-export default Objectsdetector;
+export default ObjectsDetector;

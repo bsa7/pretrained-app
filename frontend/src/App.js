@@ -1,24 +1,18 @@
 import "./App.css";
-import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
-import Home from "./pages/Home";
-import Navbar from "./components/Navbar";
-import About from "./pages/About";
-import Modals from "./pages/Modals";
-import ModalState from "./context/Modals/ModalState";
+import { BrowserRouter as Router } from "react-router-dom";
+import ModelState from "./context/Models/ModelState";
+import Layout from "./components/Layout";
+import ApplicationRoutes from "./components/ApplicationRoutes";
+
 function App() {
   return (
-    <ModalState>
+    <ModelState>
       <Router>
-        <div className='App'>
-          <Navbar />
-          <Routes>
-            <Route path='/' element={<Home />} />
-            <Route path='/modals' element={<Modals />} />
-            <Route path='/about' element={<About />} />
-          </Routes>
-        </div>
+        <Layout title='Приложение с предварительно обученными моделями' subtitle="Lorem ipsum">
+          <ApplicationRoutes />
+        </Layout>
       </Router>
-    </ModalState>
+    </ModelState>
   );
 }
 

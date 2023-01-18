@@ -2,8 +2,8 @@
 
 import axios from "axios";
 import { useReducer } from "react";
-import modalContext from "./modalContext";
-import modalReducer from "./modalReducer";
+import modelContext from "./modelContext";
+import modelReducer from "./modelReducer";
 import {
   GET_TRANSLATION,
   UPDATE_LANGUAGES,
@@ -11,7 +11,7 @@ import {
   RESET_FIELDS,
   RESET_OBJ,
 } from "../types";
-const ModalState = (props) => {
+const ModelState = (props) => {
   const initialState = {
     userText: "",
     translatedText: "",
@@ -20,7 +20,7 @@ const ModalState = (props) => {
     languages: [],
   };
 
-  const [state, dispatch] = useReducer(modalReducer, initialState);
+  const [state, dispatch] = useReducer(modelReducer, initialState);
   // get translation based on what the user entered
   const getTranslation = async (text) => {
     if (text.trim() === "") {
@@ -138,7 +138,7 @@ const ModalState = (props) => {
     dispatch({ type: RESET_OBJ });
   };
   return (
-    <modalContext.Provider
+    <modelContext.Provider
       value={{
         translatedText: state.translatedText,
         languages: state.languages,
@@ -154,7 +154,7 @@ const ModalState = (props) => {
       }}
     >
       {props.children}
-    </modalContext.Provider>
+    </modelContext.Provider>
   );
 };
-export default ModalState;
+export default ModelState;

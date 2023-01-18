@@ -6,12 +6,12 @@
 
 /** @format */
 import React, { useRef, useEffect, useContext } from "react";
-import ModalContext from "../context/Modals/modalContext";
+import ModelContext from "../context/Models/modelContext";
 const Canvas = ({ url }) => {
   const canvas = useRef();
   let ctx = null;
-  const modalContext = useContext(ModalContext);
-  const { objects } = modalContext;
+  const modelContext = useContext(ModelContext);
+  const { objects } = modelContext;
   // draw rectangle
   const drawRect = (info, style, det) => {
     const { xmin, ymin, xmax, ymax } = info;

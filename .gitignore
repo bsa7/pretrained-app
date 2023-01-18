@@ -8,3 +8,5 @@ tmp
 .vscode
 api/log/*.log
 .env
+.expo
+web-build
