@@ -55,7 +55,18 @@ module.exports = {
     // Commonly used in projects, e.g. in JSX files.
     'global-require': 'off',
 
-    'import/extensions': 'off',
+    'import/extensions': [
+      "error",
+      "ignorePackages",
+      {
+        "css": "always",
+        "svg": "always",
+        "js": "never",
+        "jsx": "never",
+        "ts": "never",
+        "tsx": "never"
+      }
+    ],
 
     // Things happen.
     'max-len': 'off',
@@ -109,6 +120,7 @@ module.exports = {
 
     'no-useless-constructor': 'off',
     '@typescript-eslint/no-unused-vars': 'off',
+    '@typescript-eslint/no-empty-function': 'off',
     '@typescript-eslint/no-useless-constructor': ['error'],
 
     'no-useless-escape': 'off',
@@ -136,6 +148,10 @@ module.exports = {
     // But such reexport makes use of external blocks libraries easier.
     'import/named': 'off',
 
+    'no-undef': 'off',
+
+    'import/no-unresolved': 'off',
+
     // Only devDeps and general deps are allowed.
     'import/no-extraneous-dependencies': ['error', {
       devDependencies: true,
@@ -157,13 +173,14 @@ module.exports = {
 
     'react/function-component-definition': [2, { namedComponents: 'arrow-function' }],
 
-    'react/jsx-filename-extension': [1, { extensions: ['.tsx'] }],
+    'react/jsx-filename-extension': [1, { extensions: ['.tsx', '.jsx'] }],
 
     // Not always convenient.
     'react/jsx-closing-tag-location': 'off',
 
     // To make it work with Fragment as global var.
     'react/jsx-no-undef': [2, { allowGlobals: true }],
+    'react/jsx-no-constructed-context-values': 'off',
 
     // Works incorrectly with &nbsp; and the similar things.
     'react/jsx-one-expression-per-line': 'off',

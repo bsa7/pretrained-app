@@ -6,9 +6,9 @@ import {
   RESET_FIELDS,
   DETECT_OBJECT,
   RESET_OBJ,
-} from "../types";
+} from '../types';
 
-const modalReducer = (state, action) => {
+const modelReducer = (state, action) => {
   switch (action.type) {
     case GET_TRANSLATION:
       return {
@@ -41,4 +41,4 @@ const modalReducer = (state, action) => {
   }
 };
 
-export default modalReducer;
+export default modelReducer;
