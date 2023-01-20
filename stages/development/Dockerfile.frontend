@@ -16,5 +16,6 @@ RUN mkdir -p $APP_PATH/.expo
 RUN mkdir -p $APP_PATH/.expo-shared
 RUN mkdir -p $APP_PATH/web-build
 COPY ./frontend/package.json $APP_PATH/.
+COPY ./frontend/.env.example $APP_PATH/.env
 WORKDIR $APP_PATH
 RUN npm i

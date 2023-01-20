@@ -21,6 +21,15 @@ mcedit ~/.ssh/authorized_keys
 
 
 mkdir -p /home/deploy/pretrained-app
+mkdir -p /home/deploy/shared/mongo
+mkdir -p /home/deploy/shared/frontend
+
+# Создать файлы секретов приложения:
+touch /home/deploy/shared/mongo/password
+touch /home/deploy/shared/mongo/root_password
+touch /home/deploy/shared/frontend/.env
+# Не забыть записать в эти файлы реальные данные!
+
 cd /home/deploy/pretrained-app
 
 # To debug a docker container:
