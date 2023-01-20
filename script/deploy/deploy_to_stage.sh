@@ -11,7 +11,8 @@ ssh deploy@$STAGING_HOST "\
   ln -sf $APP_PATH/stages/$STAGE/docker-compose.yml $APP_PATH/docker-compose.yml \
   && cd $APP_PATH \
   && cp -r ../shared/ ./ \
-  && cp ./shared/stages/$STAGE/mongo/password ./shared/stages/$STAGE/mongo/root_password ./stages/$STAGE/mongo \
+  && cp ../shared/stages/$STAGE/mongo/password ../shared/stages/$STAGE/mongo/root_password ./stages/$STAGE/mongo \
+  && cp ../shared/stages/$STAGE/frontend/.env ./stages/$STAGE/frontend \
   && mkdir -p api/tmp \
   && mkdir -p api/log \
   && touch api/log/production.log \

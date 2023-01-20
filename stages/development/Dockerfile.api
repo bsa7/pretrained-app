@@ -14,10 +14,8 @@ ENV APP_PATH=/home/pn/api
 ENV PATH="${PATH}:/home/pn/.local/bin"
 WORKDIR $APP_PATH
 EXPOSE 5000
-RUN mkdir -p ./api/tmp
 COPY --chown=pn:pn ./api/requirements.txt ./requirements.txt
 RUN pip install --upgrade pip && \
-    pip install setuptools==65.5.1 && \
     pip install numpy && \
     pip install waitress && \
     pip install -r requirements.txt
