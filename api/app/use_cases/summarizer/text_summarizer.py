@@ -2,21 +2,21 @@
 import re
 import os
 import torch
-from summarizer import Summarizer
+from summarizers import Summarizers
 
 class TextSummarizer:
   ''' Класс выполняет автореферат текста '''
   def __init__(self):
-    torch.cuda.empty_cache()
     self.source_text = None
     self.result = 'Здесь будет результат автореферирования'
-    api_env = os.getenv('API_ENV')
-    print(f'{api_env=}')
-    if api_env == 'test':
-      # При запуске тестов на гитхабе этот код падает из-за ограничений
-      self.model = None
-    else:
-      self.model = Summarizer()
+    self.model = Summarizers()
+    # api_env = os.getenv('API_ENV')
+    # print(f'{api_env=}')
+    # if api_env == 'test':
+    #   # При запуске тестов на гитхабе этот код падает из-за ограничений
+    #   self.model = None
+    # else:
+    #   self.model = Summarizers()
 
   def summarize_text(self, text: str) -> str:
     ''' Выполняет автореферирование '''
@@ -25,7 +25,7 @@ class TextSummarizer:
     if self.model is None:
       return self.source_text
 
-    self.result = self.model(prepared_text, ratio = 0.1)
+    self.result = self.model(prepared_text)
     return self.result
 
   def __prepare_text(self, text: str) -> str:
