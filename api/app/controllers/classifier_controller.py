@@ -15,14 +15,23 @@ class ClassifierController(ApplicationController):
     return self.render()
 
   def show(self) -> dict:
-    params = self.show_params()
+    ''' Рендер HTML '''
+    params = self._params()
     image_url = params.get('image_url')
     recognition_result = self.object_classifier.call(image_url)
 
     return self.render(locals = { 'image_url': image_url, 'recognition_result': recognition_result })
 
-  # private controller methods:
+  def classify_image(self) -> dict:
+    ''' JSON API response '''
+    params = self._params()
+    image_url = params.get('image_url')
 
-  def show_params(self):
-    ''' Возвращает параметры, переданные экшену "start" '''
-    return self._params()
+    if image_url is None or image_url == '':
+      return { 'image_url': image_url, 'recognition_result': None }, 400
+
+    recognition_result = self.object_classifier.call(image_url)
+    if 'произошла ошибка' in recognition_result:
+      return { 'image_url': image_url, 'recognition_result': recognition_result }, 400
+
+    return { 'image_url': image_url, 'recognition_result': recognition_result }
