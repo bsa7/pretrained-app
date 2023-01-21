@@ -23,7 +23,7 @@ class ObjectClassifier:
       logging.info(f'Ошибка: {error=}')
       logging.info(f'Методы: {dir(error)=}')
       logging.info(f'Класс: {type(error)=}')
-      logging.info(f'Сообщение: {error.strerror=}')
+      # logging.info(f'Сообщение: {error.strerror=}')
       return f'произошла неожиданная ошибка: {error}'
 
     if image is None:
