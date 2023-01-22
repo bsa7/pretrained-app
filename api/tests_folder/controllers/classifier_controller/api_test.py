@@ -3,7 +3,6 @@
 from flask import url_for
 from ward import each, test
 from tests_folder.fixtures import client
-import pdb
 
 @test('should return status 400 for POST (classify_image) within image_url passed', tags=['api', 'classifier'])
 def _(client=client, resource=each('classifier')):
