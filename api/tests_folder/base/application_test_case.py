@@ -6,12 +6,14 @@ from config.application import Application
 
 class ApplicationTestCase():
   ''' This is base class for all unit tests '''
+  def __init__(self):
+    self.application = Application(__name__).app
+
   @property
   def app(self):
     ''' Initializes application test instance '''
-    app = Application(__name__).app
-    print(f'{app=}')
-    return app
+    print(f'{self.application=}')
+    return self.application
 
   @property
   def test_client(self):

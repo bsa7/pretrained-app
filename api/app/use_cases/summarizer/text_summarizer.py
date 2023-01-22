@@ -3,20 +3,14 @@ import re
 import os
 import torch
 from summarizers import Summarizers
+from app.lib.singleton import Singleton
 
-class TextSummarizer:
+class TextSummarizer(metaclass = Singleton):
   ''' Класс выполняет автореферат текста '''
   def __init__(self):
     self.source_text = None
     self.result = 'Здесь будет результат автореферирования'
     self.model = Summarizers()
-    # api_env = os.getenv('API_ENV')
-    # print(f'{api_env=}')
-    # if api_env == 'test':
-    #   # При запуске тестов на гитхабе этот код падает из-за ограничений
-    #   self.model = None
-    # else:
-    #   self.model = Summarizers()
 
   def summarize_text(self, text: str) -> str:
     ''' Выполняет автореферирование '''

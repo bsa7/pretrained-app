@@ -3,13 +3,14 @@ from ward import fixture
 from splinter import Browser
 from tests_folder.base.application_test_case import Application
 
+app = Application(__name__).app
+app.testing = True
+application_context = app.test_request_context()
+application_context.push()
+
 @fixture
 def app_context():
   ''' This fixture used as mock of your application '''
-  app = Application(__name__).app
-  app.testing = True
-  context = app.test_request_context()
-  context.push()
   return app
 
 @fixture

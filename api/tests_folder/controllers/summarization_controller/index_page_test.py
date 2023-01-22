@@ -2,8 +2,7 @@
 
 from flask import url_for
 from ward import each, test
-from tests_folder.fixtures import client, browser
-import pdb
+from tests_folder.fixtures import client
 
 @test('Возвращает статус 200 для GET запроса', tags=['request', 'text_summarization'])
 def _(client = client, resource = each('summarization')):

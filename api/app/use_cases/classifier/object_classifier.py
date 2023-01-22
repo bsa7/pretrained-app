@@ -5,8 +5,9 @@ from PIL import Image, UnidentifiedImageError
 import logging
 import re
 import requests
+from app.lib.singleton import Singleton
 
-class ObjectClassifier:
+class ObjectClassifier(metaclass = Singleton):
   ''' Класс выполняет классификацию объектов на изображении '''
   def __init__(self):
     self.feature_extractor = ViTFeatureExtractor.from_pretrained('google/vit-base-patch16-224')

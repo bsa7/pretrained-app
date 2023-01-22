@@ -3,7 +3,6 @@
 from flask import url_for
 from ward import each, test
 from tests_folder.fixtures import client
-import pdb
 
 @test('should return status 200 for GET (INDEX)', tags=['request', 'classifier'])
 def _(client=client, resource=each('classifier')):
